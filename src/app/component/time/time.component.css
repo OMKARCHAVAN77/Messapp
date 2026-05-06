@@ -1,0 +1,189 @@
+.card {
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+
+
+label {
+  font-family: "Poppins", sans-serif; 
+}
+
+h2 {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+}
+
+.example-small-box {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.mat-expansion-panel-header {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.checked-box {
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 20px;
+  list-style: disc;
+  color: #555;
+  margin-top: 10px;
+}
+
+.mat-expansion-panel:not(.mat-expanded) {
+  transition: box-shadow 0.3s;
+}
+
+.mat-expansion-panel:not(.mat-expanded):hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.input-button-wrapper {
+  display: flex;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.custom-input {
+  flex: 1;
+  margin: 0;
+}
+
+.click-button {
+  border-radius: 5px;
+  color: #fff;
+  height: 56px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+  min-width: 120px;
+}
+
+label.font-weight-bold {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.d-flex mat-form-field {
+  width: 150px;
+}
+
+small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #555;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mat-radio-button {
+  margin-right: 16px;
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 10px 2px;
+
+}
+
+.header h4 {
+  margin: 0;
+  font-size: 26px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #000;
+
+
+}
+
+.logout-btn {
+  padding: 6px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+
+mat-label {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.form-header {
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #000000;
+}
+mat-option{
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+.form-btn{
+  background-color: #FF8000;
+  color: #ffff;
+  border: none;
+  border-radius: 75px;
+  padding: 6px 25px;
+    font-family: "Poppins", sans-serif;
+}
+.form-btn:hover {
+  background-color: #e99139;
+}

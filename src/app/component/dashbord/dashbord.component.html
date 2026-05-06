@@ -1,0 +1,101 @@
+<div class="header">
+    <h4>Dashboard</h4>
+    <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
+  </div>
+<div class="dashboard-container">
+    <!-- Top Cards Row -->
+
+    <div class="dashboard-row">
+
+      <!-- Customer Reviews Section -->
+      <div class="card review-section">
+        <div class="card-header">
+          <div class="header-content">
+            
+            <h2>Customer Reviews</h2>
+          </div>
+        
+        </div>
+        
+        <div class="rating-bars">
+          <div class="stars" [innerHTML]="getStarRating(averageRating)"></div>
+        </div>
+        <div class="rating-value text-center">{{ averageRating }}<span class="rating-out-of">/5</span></div>
+      </div>
+  
+      <!-- Food Served Section -->
+      <div class="card food-section">
+        <div class="card-header">
+          <div class="header-content">
+            <h2>Food Preferences</h2>
+          </div>
+        </div>
+        <div class="food-content">
+          <div class="chart-wrapper">
+            <p-chart type="doughnut" [data]="doughnutData" [options]="doughnutOptions"></p-chart>
+          </div>
+          <div class="food-legend">
+            <div class="legend-item">
+              <span class="legend-dot veg"></span>
+              <div class="legend-text">
+                <span class="legend-label">Vegetarian</span>
+                <span class="legend-value">40%</span>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot nonveg"></span>
+              <div class="legend-text">
+                <span class="legend-label">Non-Vegetarian</span>
+                <span class="legend-value">60%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Total Customer Viewed -->
+      <div class="card viewed-section">
+        <div class="card-header">
+          <div class="header-content">
+            
+            <h2>Total Views</h2>
+          </div>
+        </div>
+        <div class="view-content">
+          <div class="view-count">
+            {{ viewCount | number }}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Customer Visit Chart -->
+    <div class="card visit-chart-section">
+      <div class="chart-header">
+        <div class="header-content">
+        
+          <h2>Customer vist</h2>
+        </div>
+    
+        <div class="time-period-selector">
+          <button *ngFor="let period of timePeriods" 
+                  [class.active]="selectedPeriod === period"
+                  class="period-btn"
+                  (click)="changeTimePeriod(period)">
+            {{ period | titlecase }}
+          </button>
+        </div>
+      </div>
+    
+      <div class="chart-container">
+        <p-chart *ngIf="!isLoading" type="bar" [data]="chartData" [options]="chartOptions" class="chart-content"></p-chart>
+    
+        <div *ngIf="isLoading" class="loading-indicator">
+          <div class="spinner-container">
+          </div>
+          <span>Loading chart data...</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>

@@ -1,0 +1,188 @@
+body, html {
+  font-family: 'Poppins', sans-serif;
+}
+.background-img {
+   background-image: url('../../../assets/images/1001550601.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Full height container setup */
+.container-fluid, .row {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+mat-icon{
+  color: #656565;
+}
+
+/* Ensure columns take full height and avoid scrollbars */
+.col-sm-6, .col-12 {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+/* Login container */
+.registerContainer {
+  padding: 30px 50px 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+ 
+}
+
+mat-form-field{
+  width: 100%;
+}
+::ng-deep .mat-form-field input {
+  font-size: 14px;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+mat-label{
+     font-family: "Poppins", sans-serif;
+     color: #7c7c7c;
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+mat-mdc-form-field-error{
+  font-family: "Poppins", sans-serif;
+}
+/* Logo background (not used in current HTML, better to use <img>) */
+.logo-bg {
+  background-image: url("../../../assets/images/logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 150px;
+  height: 50px;
+  margin: 28px auto; /* Centers the div horizontally */
+  display: block;
+}
+
+
+.Welcome{
+  font-size:23px ;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Forgot password link */
+.forgot-password {
+  font-size: 14px;
+  font-weight: 500;
+  color: #656565;
+   font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/* Captcha display block */
+.captcha-code {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Full width utility */
+.full-width {
+  width: 100%;
+}
+
+/* Login button styles */
+.loginbtn {
+    background: #005DFF;
+    color: white;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+
+/* Google login block */
+.googleLink {
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.google-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+
+}
+
+.text {
+  text-decoration: none;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* Register anchor styling */
+.loginAchorTag a {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+
+}
+.loginAchorTag{
+  color: #656565;
+  margin-top: 10px;
+    font-family: "Poppins", sans-serif;
+}
+.text-center{
+    font-family: "Poppins", sans-serif;
+}
+
+.divider-with-text {
+  display: flex;
+  align-items: center;
+    font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #000000;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.divider-with-text::before,
+.divider-with-text::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #999;
+  margin: 0 10px;
+}
+

@@ -1,0 +1,392 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.backgroud-img{
+ background: linear-gradient(155.33deg, #D7E2F2 , #F5DED7 );
+}
+.main-container{
+  width:75%
+}
+
+.Photo{
+  width: 200px;
+}
+h2{
+  font-size: 40px;
+  color: #76b5d4; /* Blue-grey dark */
+  font-weight: 500;
+     font-family: "Poppins", sans-serif;
+}
+.header {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  color: #37474f; /* Blue-grey dark */
+}
+
+/* Common mat-form-field outline appearance
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 6px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 12px 10px;
+  font-size: 15px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #1976d2; /* Primary on focus */
+
+
+/* Input text style */
+::ng-deep .mat-form-field input {
+  font-size: 14px;
+  color: #333;
+      font-family: "Poppins", sans-serif;
+}
+
+mat-label{
+     font-family: "Poppins", sans-serif;
+     color: #7c7c7c;
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+mat-mdc-form-field-error{
+  font-family: "Poppins", sans-serif;
+}
+/* Preview Image Styling */
+.preview-box {
+  margin-top: 10px;
+  max-width: 150px;
+  max-height: 150px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.Photo {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Upload button styling */
+
+.uploadd-container {
+  display: inline-block;
+  position: relative;
+  margin: 10px 0;
+}
+
+.file-upload-label {
+ display: inline-block;
+    font-family: "Poppins", sans-serif;
+    padding: 15px 92px;
+    background: #1479FF;
+    color: white;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.file-upload-label:hover {
+  background-color: #3367d6;
+
+}
+
+.file-upload-label:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.text-decoration{
+  text-decoration:underline
+}
+.upload-area {
+  background-color: #1479FF0D;
+     font-family: "Poppins", sans-serif;
+  transition: background-color 0.3s ease;
+  border: 1px dotted #1479FF;
+}
+
+.upload-area:hover {
+  background-color: #e8f4ff;
+}
+
+.cloud-upload {
+  color: #1479FF;
+}
+.cloud-upload-text {
+  color: #000000;
+  font-weight: 400;
+
+}
+mat-radio-button{
+  font-family: "Poppins", sans-serif;
+
+}
+
+.poppins-font{
+      font-family: "Poppins", sans-serif;
+}
+.template-font{
+   font-family: "Poppins", sans-serif;
+   font-weight: 500;
+   font-size: 18px;
+}
+.form-btn{
+  background-color: #FF8000;
+  color: #ffff;
+  border: none;
+  border-radius: 75px;
+  padding: 6px 25px;
+    font-family: "Poppins", sans-serif;
+}
+.form-btn:hover {
+  background-color: #e99139;
+}
+.back-btn{
+    padding: 5px 24px;
+   border: none;
+    border-radius: 99px;
+    background-color: #F3F3F3;
+      font-family: "Poppins", sans-serif;
+}
+
+.back-btn:hover {
+  background-color: #e2e2e27a;
+}
+
+
+/* For when image is uploaded */
+.license-uploaded .file-upload-label {
+  background-color: #34a853;
+}
+
+.license-uploaded .file-upload-label::before {
+  content: "✓ ";
+}
+/* step 2*/
+
+.container {
+  max-width: 900px;
+}
+
+.btnpadding{
+  margin-bottom: 150px;
+}
+
+h2 {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+}
+mat-card{
+    background-color: #fff;
+}
+.example-small-box {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.mat-expansion-panel-header {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 24px 16px;
+  background-color: white;
+}
+
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  align-items: flex-end;
+}
+.addbtn{
+padding-left: 15px;
+padding-right: 15px;
+ font-family: "Poppins", sans-serif;
+
+}
+mat-panel-title{
+font-family: "Poppins", sans-serif;
+}
+
+::ng-deep mat-checkbox .mdc-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+mat-tab{
+  font-family: "Poppins", sans-serif;
+}
+
+.input-group {
+   font-family: "Poppins", sans-serif;
+}
+ul {
+  padding-left: 20px;
+  list-style: disc;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Optional: Add hover or shadow for panels */
+.mat-expansion-panel:not(.mat-expanded) {
+  transition: box-shadow 0.3s;
+}
+
+.mat-expansion-panel:not(.mat-expanded):hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.input-button-wrapper {
+  display: flex;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.custom-input {
+  flex: 1;
+  margin: 0;
+ 
+}
+
+.click-button {
+  border-radius: 5px;
+  color: #fff(255, 255, 255);
+  height: 56px; 
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+
+label.font-weight-bold {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 120px;
+}
+
+.d-flex mat-form-field {
+  width: 150px;
+}
+
+small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #555;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mat-radio-button {
+  margin-right: 16px;
+  
+  font-size: 14px;
+}
+
+.mt-3 {
+  margin-top: 16px;
+}
+
+.stepper-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+mat-radio-button{
+  font-family: "Poppins", sans-serif;
+}
+.rsIcon{
+  font-size: 20px;
+  padding-left: 15px;
+  font-weight: 400;
+}
+
+::ng-deep mat-radio-button .mdc-form-field {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.btn-group {
+  display: flex;
+  font-family: 'Poppins', sans-serif !important;
+  gap: 12px; /* Modern spacing between buttons */
+  flex-wrap: wrap; /* Makes it responsive on smaller screens */
+  margin-bottom: 16px; /* Optional spacing below the buttons */
+}
+
+.btn-group button {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-transform: capitalize; /* Optional: for better readability */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: transform 0.2s ease;
+}
+
+.back-btn{
+    padding: 5px 24px;
+   border: none;
+    border-radius: 99px;
+    background-color: #F3F3F3;
+      font-family: "Poppins", sans-serif;
+}
+.btn-group button:hover {
+  transform: translateY(-1px);
+}
+
+.btn-icon{
+  vertical-align: middle;
+  margin-right: 6px;
+}

@@ -1,0 +1,12 @@
+<div class="layout-wrapper">
+  <!-- Sidebar -->
+  <div
+    class="sidebar-col" [class.collapsed]="isSidebarCollapsed" >
+    <app-sidenav (toggleSidebar)="toggleSidebar()"></app-sidenav>
+  </div>
+
+  <!-- Content -->
+  <div class="content-col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

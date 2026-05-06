@@ -1,0 +1,91 @@
+<div class="header">
+  <h4>Price</h4>
+  <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
+</div>
+<form [formGroup]="priceDetails">
+    <div class="card p-4 pt-2 ">
+      <div class="price-container">
+        <!-- Always visible fields -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Monthly membership charges</mat-label>
+          <span matPrefix class="ml-2 rsIcon">₹&nbsp;</span>
+          <input
+            matInput
+            type="number"
+            formControlName="monthlyCharges"
+            required
+          />
+          <mat-error
+            *ngIf="priceDetails.get('monthlyCharges')?.hasError('required')"
+          >
+            Monthly charges are required
+          </mat-error>
+          <mat-error
+            *ngIf="priceDetails.get('monthlyCharges')?.hasError('min')"
+          >
+            Must be a positive value
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Single time meal charges</mat-label>
+          <span matPrefix class="ml-2 rsIcon">₹&nbsp;</span>
+          <input
+            matInput
+            type="number"
+            formControlName="singleDayCharges"
+            required
+          />
+          <mat-error
+            *ngIf="priceDetails.get('singleDayCharges')?.hasError('required')"
+          >
+            Meal charges are required
+          </mat-error>
+          <mat-error
+            *ngIf="priceDetails.get('singleDayCharges')?.hasError('min')"
+          >
+            Must be a positive value
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Special day charges</mat-label>
+          <span matPrefix class="ml-2 rsIcon">₹&nbsp;</span>
+          <input
+            matInput
+            type="number"
+            formControlName="specialDayVegCharges"
+            required
+          />
+          <mat-error
+            *ngIf="
+              priceDetails.get('specialDayVegCharges')?.hasError('required')
+            "
+          >
+            Special charges are required
+          </mat-error>
+          <mat-error
+            *ngIf="priceDetails.get('specialDayVegCharges')?.hasError('min')"
+          >
+            Must be a positive value
+          </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="priceDetails.get('foodType')?.value === 'Non-veg'">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Non-veg charges</mat-label>
+            <span matPrefix class="ml-2 rsIcon">₹&nbsp;</span>
+            <input
+              matInput
+              type="number"
+              formControlName="specialDaynonVegCharges"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <hr class="p-0" />
+      <div class="d-flex justify-content-end">
+        <button class="form-btn" (click)="onSave()">Save</button>
+      </div>
+    </div>
+</form>

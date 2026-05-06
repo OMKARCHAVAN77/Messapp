@@ -1,0 +1,173 @@
+
+
+/* Card styling */
+mat-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+   font-family: "Poppins", sans-serif;
+  background-color: #ffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 10px 2px ;
+  
+}
+mat-panel-title{
+    font-family: "Poppins", sans-serif;
+}
+
+::ng-deep mat-checkbox .mdc-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+mat-label{
+     font-family: "Poppins", sans-serif;
+     color: #7c7c7c;
+     background-color: white;
+}
+.expand{
+    font-family: "Poppins", sans-serif;
+}
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 24px 16px;
+  background-color: white;
+}
+
+
+.form-control::placeholder {
+  font-family: 'Poppins', sans-serif;
+}
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif !important;
+}
+.header h4 {
+  margin: 0;
+  font-size: 26px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #000;
+
+
+}
+
+.logout-btn {
+  padding: 6px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Tab group styling */
+mat-tab-group {
+  margin-top: 15px;
+}
+
+/* Expansion panel styling */
+mat-expansion-panel {
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+mat-expansion-panel-header {
+  background-color: #ffffff !important;
+}
+.form-btn{
+  background-color: #FF8000;
+  color: #ffff;
+  border: none;
+  border-radius: 75px;
+  padding: 6px 25px;
+    font-family: "Poppins", sans-serif;
+}
+.form-btn:hover {
+  background-color: #e99139;
+}
+/* Menu options section */
+.menu-options {
+  background-color: #ffffff;
+  border-radius: 4px;
+
+}
+
+.example-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+
+
+/* Input group styling */
+
+
+.form-control {
+  border-radius: 4px 0 0 4px !important;
+  border: 1px solid #ced4da;
+  padding: 9px 12px;
+  margin-top: 10px;
+}
+
+.input-group-append .btn {
+  border-radius: 0 4px 4px 0;
+  background-color: #0069D9;
+  color: white;
+  border: none;
+   font-family: "Poppins", sans-serif;
+  margin-top: 10px;
+  padding: 7px 15px;
+}
+
+/* Button styling */
+.button .mat-raised-button {
+  padding: 8px 25px;
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .example-section {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-group {
+    width: 100%;
+  }
+}
+
+/* Hover effects */
+.btn-info:hover {
+  background-color: #6cbbc5 !important;
+}
+
+mat-checkbox:hover {
+  background-color: #f5f5f5;
+}
+
+/* Focus states */
+.form-control:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 0.2rem rgba(63, 81, 181, 0.25);
+}
+
+/* Animation for expansion panels */
+mat-expansion-panel {
+  transition: all 0.3s ease;
+}

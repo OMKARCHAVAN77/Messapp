@@ -1,0 +1,26 @@
+body, html {
+  height: 100vh;
+  margin: 0;
+}
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+
+
+.sidebar-col.collapsed {
+  width: 60px; /* Optional: you can adjust this width for collapsed state */
+}
+
+/* Content */
+.content-col {
+  flex-grow: 1;
+  background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
+  padding: 10px 15px;
+  margin-left: 18px;
+ height: 100vh; /* This is key */
+  overflow-y: auto; /* Optional: adds scroll if content overflows */
+}
+

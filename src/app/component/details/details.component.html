@@ -1,0 +1,214 @@
+<div class="mainheader">
+  <h4>Details</h4>
+  <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
+</div>
+<form [formGroup]="messDetails">
+
+  <div class="card p-4">
+    <div class="col-12 m2">
+      <mat-label class="name header">Mess Owner</mat-label>
+      <mat-form-field class="mt-2 w-100" appearance="outline">
+        <mat-label>Mess Owner</mat-label>
+        <input matInput formControlName="messName" required />
+        <mat-error *ngIf="messDetails.get('messName')?.hasError('required')">
+          Mess name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Address -->
+      <mat-label class="Address header">Address</mat-label>
+      <div formGroupName="address">
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field class="w-100 mt-1" appearance="outline">
+              <mat-label>Shop number/Building number</mat-label>
+              <input matInput formControlName="shopNumber" required />
+              <mat-error *ngIf="
+                    messDetails.get('address.shopNumber')?.hasError('required')
+                  ">
+                Shop number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>Area/Locality</mat-label>
+              <input matInput formControlName="area" required />
+              <mat-error *ngIf="messDetails.get('address.area')?.hasError('required')">
+                Area is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" required />
+              <mat-error *ngIf="messDetails.get('address.city')?.hasError('required')">
+                City is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>Pincode</mat-label>
+              <input matInput formControlName="pincode" required />
+              <mat-error *ngIf="
+                    messDetails.get('address.pincode')?.hasError('required')
+                  ">
+                Pincode is required
+              </mat-error>
+              <mat-error *ngIf="
+                    messDetails.get('address.pincode')?.hasError('pattern')
+                  ">
+                Invalid pincode (6 digits required)
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Add nearby landmark</mat-label>
+          <input matInput formControlName="landmark" required />
+          <mat-error *ngIf="messDetails.get('address.landmark')?.hasError('required')">
+            Landmark is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Contact -->
+      <mat-label class="header">Contact</mat-label>
+      <div formGroupName="contact">
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>Mobile number</mat-label>
+              <input matInput type="number" formControlName="mobileNumber" required />
+              <mat-error *ngIf="
+                    messDetails
+                      .get('contact.mobileNumber')
+                      ?.hasError('required')
+                  ">
+                Mobile number is required
+              </mat-error>
+              <mat-error *ngIf="
+                    messDetails.get('contact.mobileNumber')?.hasError('pattern')
+                  ">
+                Invalid mobile number (10 digits required)
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>Email id</mat-label>
+              <input matInput formControlName="email" required />
+              <mat-error *ngIf="messDetails.get('contact.email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="messDetails.get('contact.email')?.hasError('email')">
+                Invalid email format
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- License -->
+      <mat-label class="header">Licence</mat-label>
+      <div formGroupName="license">
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field class="w-100 " appearance="outline">
+              <mat-label>Food license number</mat-label>
+              <input matInput formControlName="licenseNumber" required />
+              <mat-error *ngIf="
+                    messDetails
+                      .get('license.licenseNumber')
+                      ?.hasError('required')
+                  ">
+                License number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <div class="uploadd-container upload-btn">
+              <label for="licenseFileInput" class="file-upload-label">
+                Upload License Image
+              </label>
+              <input #licenseFileInput id="licenseFileInput" type="file" (change)="onLicenseFileChange($event)"
+                accept="image/*" style="display: none" />
+            </div>
+
+            <div class="col-sm-3">
+              <div class="image-container w-100" *ngIf="myFoodLicensePhoto">
+                <img [src]="myFoodLicensePhoto" alt="Food Licence Photo" class="license-preview-img" />
+                <button type="button" mat-icon-button class="delete-button" (click)="removePhoto()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="row">
+          <mat-label class="header ml-3 ">Food you serve</mat-label>
+        </div>
+          <div class="row pl-3">
+            <mat-radio-group formControlName="foodType" required class="custom-radio-group" style="font-family: 'Poppins', sans-serif;">
+          <mat-radio-button value="veg" color="primary" (change)="onVegNonVeg('Veg')">
+            Veg
+          </mat-radio-button>
+          <mat-radio-button value="Non-veg" color="primary" (change)="onVegNonVeg('Non-veg')">
+            Veg & non-veg
+          </mat-radio-button>
+        </mat-radio-group>
+        </div>
+        <mat-error *ngIf="
+              messDetails.get('foodType')?.hasError('required') &&
+              messDetails.get('foodType')?.touched
+            ">
+          Food type is required
+        </mat-error>
+      </div>
+
+      <div>          
+        <mat-label class="header">Add your mess images</mat-label>
+        <div class="row">
+          <div class="col-12">
+            <div class="file-upload-container rounded border p-2 w-100 text-center">
+              <label for="fileInput" class="file-upload-label">
+                {{ getSelectedFileNames() }}
+              </label>
+              
+              <input #fileInput id="fileInput" type="file" (change)="onFileChange($event)" multiple accept="image/*"
+                style="display: none" />
+            </div>
+          </div>
+        </div>
+
+        <div class="image-preview-container mt-3" *ngIf="imagePreviews.length > 0">
+          <mat-label class="header mb-2">Image Previews</mat-label>
+          <div class="row mt-1">
+            <div *ngFor="let preview of imagePreviews; let i = index" class="col-md-3">
+              <div class="image-preview d-inline-block">
+                <img style="width: 100%; height: 250px" [src]="preview" alt="Image Preview" />
+                <button type="button" class="btn btn-danger btn-sm ml-2" (click)="removeImage(i)">
+                  X
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="p-0" />
+      <div class="d-flex justify-content-end">
+        <button class="form-btn btn" (click)="onSave()">save</button>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,87 @@
+<div class="no-scroll">
+  <div class="row no-gutters h-100">
+    <!-- Left Background Image -->
+    <div class="col-8 d-none d-sm-block p-0">
+      <div class="background-img"></div>
+    </div>
+
+    <!-- Right Form -->
+    <div class="col-4 p-0">
+      <div class="registerContainer d-flex flex-column justify-content-center align-items-center">
+        <form [formGroup]="myRegisterForm" (submit)="onSubmit()" >
+          <div class="logo-bg"></div>
+        
+          <mat-form-field appearance="outline" >
+            <mat-label>User Name</mat-label>
+            <input matInput formControlName="username" placeholder="Enter Your User Name" #usernameInput>
+            <mat-error *ngIf="myRegisterForm.get('username')?.hasError('required')">
+              *UserName is required
+            </mat-error>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Email/Mobile number</mat-label>
+            <input matInput formControlName="emailId" placeholder="Enter Your Email/Mobile number..." />
+            <mat-error *ngIf="myRegisterForm.get('emailId')?.hasError('required')">
+              *Email is required
+            </mat-error>
+            <mat-error *ngIf="myRegisterForm.get('emailId')?.hasError('email')">
+              *Invalid email format
+            </mat-error>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter Password" />
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="myRegisterForm.get('password')?.hasError('required')">
+              *Password is required
+            </mat-error>
+            <mat-error *ngIf="myRegisterForm.get('password')?.hasError('minlength')">
+              Password must be at least 6 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
+            <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
+              <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="myRegisterForm.get('confirmPassword')?.hasError('required')">
+              *Confirm Password is required
+            </mat-error>
+            <mat-error *ngIf="myRegisterForm.errors?.['mismatch']">
+              Passwords do not match
+            </mat-error>
+          </mat-form-field>
+
+          <mat-radio-group formControlName="role" class="d-block" >
+          <mat-radio-button value="Mess Owner">Mess Owner</mat-radio-button>
+          <mat-radio-button value="Customer" class="ml-3">Customer</mat-radio-button>
+          <mat-radio-button value="Admin" class="ml-3">Admin</mat-radio-button>
+        </mat-radio-group>
+          <mat-error *ngIf="myRegisterForm.get('role')?.touched && myRegisterForm.get('role')?.hasError('required')">
+            *User role is required
+          </mat-error>
+
+          <button  class="w-100 btn loginbtn ">Register</button>
+
+           <div class="divider-with-text  my-2">or Register With</div>
+         <div class="googleLink">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" class="google-icon">
+            <a class="text" href="https://www.google.com/" target="_blank"><span>Continue with Google</span></a>
+          </div>
+
+          <div class="loginAchorTag text-center">
+            Already have an account? <a routerLink="/login">LogIn</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

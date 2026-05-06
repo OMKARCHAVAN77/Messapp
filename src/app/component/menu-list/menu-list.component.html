@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-12">
+        <h5 class="text-center  mb-2  mt-4">Today's Menu</h5>
+        <!-- Morning Meal -->
+        <div class="meal-card d-flex align-items-center justify-content-between mb-4 p-3 ">
+          <div class="d-flex align-items-center">
+            <img src="http://b.zmtcdn.com/data/pictures/chains/3/21211713/2f470bf2351c17c0c11bf5cbbf55a97a.jpeg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A" alt="Morning Thali"  class="meal-img me-3">
+            <div class="ml-3">
+              <h6 class="mb-1 ">Morning Meal</h6>
+              <div class="tags">
+                <span class="tag" *ngFor="let item of myMorningMenuList">{{ item }}</span>
+              </div>
+            </div>
+          </div>
+          <div class=" price">
+            ₹{{ myUnqiuePriceDetails.singleDayCharges }}
+          </div>
+        </div>
+
+        <!-- Evening Meal -->
+        <div class="meal-card d-flex align-items-center justify-content-between mb-5 p-3">
+          <div class="d-flex align-items-center">
+            <img src="http://b.zmtcdn.com/data/pictures/chains/3/21211713/2f470bf2351c17c0c11bf5cbbf55a97a.jpeg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A" alt="Evening Meal" class="meal-img me-3">
+            <div class="ml-3">
+              <h6 class="mb-1 ">Evening Meal</h6>
+              <div class="tags">
+                <span class="tag" *ngFor="let item of myEveningMenuList">{{ item }}</span>
+              </div>
+            </div>
+          </div>
+          <div class=" price">
+            ₹{{ myUnqiuePriceDetails.singleDayCharges }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

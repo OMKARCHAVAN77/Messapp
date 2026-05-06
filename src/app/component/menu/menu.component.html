@@ -1,0 +1,106 @@
+<div class="header">
+  <h4>Menu</h4>
+  <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
+</div>
+<div class="mainContainer">
+  <mat-card class="">
+    <div class="row ">
+      <div class="col-sm-12">
+        <div class="btn-group mb-1 d-flex justify-content-end">
+          <button mat-raised-button color="primary" class="me-2 expand" (click)="expandAll()"><mat-icon>expand_more</mat-icon>
+            Expand All</button>
+          <button mat-raised-button color="warn" class="ml-3 expand" (click)="collapseAll()"><mat-icon
+              class="btn-icon">expand_less</mat-icon>
+            Collapse All</button>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="MenuDetailsForm" (submit)="onMenuDetailsSubmit()">
+      <div formGroupName="menuDetails">
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-tab-group>
+              <!-- Morning Meals -->
+              <mat-tab label="Morning Meals" class="m-2">
+                <div formGroupName="morning">
+                  <mat-accordion class="m-2" multi="true">
+                    <mat-expansion-panel *ngFor="let item of menuList; let i = index" [expanded]="isExpanded(item.day)"
+                      (opened)="item.expanded = true" (closed)="item.expanded = false">
+
+                      <mat-expansion-panel-header>
+                        <mat-panel-title [ngStyle]="{'fontSize':'15px'}">{{ item.day }}</mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="menu-options mt-1">
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" *ngFor="let food of item.morningMenu"
+                            [checked]="isFoodSelected(item.day, 'morning', food)"
+                            (change)="toggleFoodSelection(item.day, 'morning', food, $event.checked)">
+                            {{ food }}
+                          </mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="row ">
+                        <div class="col-sm-6">
+                          <div class="input-group mb-1">
+                            <input type="text" class="form-control" placeholder="Enter Your Food" #morningInput>
+                            <div class="input-group-append">
+                              <button class="btn btn-info" type="button"
+                                (click)="showToFoodItem(item.day, 'morning', morningInput)">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </mat-tab>
+
+              <!-- Evening Meals -->
+              <mat-tab label="Evening Meals">
+                <div formGroupName="evening">
+                  <mat-accordion class="m-2" multi="true">
+                    <mat-expansion-panel *ngFor="let item of menuList; let i = index" [expanded]="isExpanded(item.day)"
+                      (opened)="item.expanded = true" (closed)="item.expanded = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title [ngStyle]="{'fontSize':'15px'}">{{ item.day }}</mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="menu-options">
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" *ngFor="let food of item.eveningMenu"
+                            [checked]="isFoodSelected(item.day, 'evening', food)"
+                            (change)="toggleFoodSelection(item.day, 'evening', food, $event.checked)">
+                            {{ food }}
+                          </mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="row my-1">
+                        <div class="col-sm-6">
+                          <div class="input-group mb-1">
+                            <input type="text" class="form-control" placeholder="Enter Your Food" #eveningInput>
+                            <div class="input-group-append">
+                              <button class="btn btn-info" type="button"
+                                (click)="showToFoodItem(item.day, 'evening', eveningInput)">
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+            <div class="button d-flex justify-content-end my-4">
+              <button class="form-btn" color="primary" (click)="onMenuDetailsSubmit()">Save</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

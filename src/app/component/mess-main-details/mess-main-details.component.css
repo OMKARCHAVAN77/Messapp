@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.mainShowContainer {
+  padding: 10px;
+}
+
+.background {
+  background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
+
+}
+
+mat-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.carouselImage {
+  padding: 10px 30px;
+}
+
+.custom-carousel-img {
+  border-radius: 8px;
+  height: 315px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.messname {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+.food-icon {
+  display: inline-block;
+  width: 40px;
+  /* adjust as needed */
+  height: 25px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+/* Veg Icon */
+.food-icon.veg {
+  background-image: url('../../../assets/images/veg.png');
+
+}
+
+/* Veg & Non-Veg Icons side by side */
+.food-icon.veg-nonveg {
+  background-image: url('../../../assets/images/veg.png'), url('../../../assets/images/nonveg_icon.png');
+  background-position: left center, right center;
+  background-size: 20px 20px, 20px 20px;
+}
+
+.address {
+  font-size: 18px;
+  color: #333333;
+  font-weight: 300px;
+  font-family: "Poppins", sans-serif;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+.custom-bookmark {
+  font-size: 40px;
+  color: #FFC300;
+  margin: 10px 0 0 55px;
+
+}
+
+.rating-section-custom {
+  display: flex;
+}
+
+.rating-badge {
+  background-color: #ffc107;
+  /* Bootstrap warning color */
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.rating-text {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.status {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.text-success {
+  color: green !important;
+}
+
+.text-warning {
+  color: orange !important;
+}
+
+.text-danger {
+  color: red !important;
+}
+
+.text-orange {
+  color: #FF8800 !important;
+}
+
+.broder {
+  border-bottom: 1px dotted #000;
+  padding-left: 10px;
+  font-size: 14px;
+  border-top: 1px dotted #000;
+}
+
+.contact-btn,
+.direction-btn,
+.share-btn {
+  background-color: #eaf3ff;
+  color: #007bff;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.feedback-btn,
+.notify-btn {
+  background-color: #8ef58d;
+  color: #097B09;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.gap-2>* {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+.custom-feedback-btn .p-button .fa {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+
+/* Feedback Button Style */
+.custom-feedback-btn ::ng-deep .p-button {
+  background: #8ef58d;
+  border: none;
+  color: #097B09;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+}
+
+
+
+.custom-dialog-content {
+
+  padding: 0 1.5rem 10px;
+  text-align: center;
+}
+
+.dialog-img {
+  width: 120px;
+  height: 90px;
+  margin: 0 auto 5px;
+  display: block;
+  border-radius: 50%;
+  background-image: url("../../../assets/images/b7ad2aad9d9a562e67828b1fe0c1c0c8c060e526\ \(1\).png");
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.dialog-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.dialog-subtitle {
+  font-size: 18px;
+  color: #1479FF;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-sign-in {
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-register {
+  background-color: #e0e7ff;
+  border: none;
+  color: #3b82f6;
+  font-family: "Poppins", sans-serif;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+}

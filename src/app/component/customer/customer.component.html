@@ -1,0 +1,156 @@
+<!-- Search Bar -->
+<mat-toolbar>
+  <div class="toolbar-container">
+    <!-- Sidebar -->
+    <a routerLink="/" class="logo-bg"></a>
+    <!-- Search Box -->
+    <div class="search-container">
+      <div class="custom-search w-100">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterMessList()"
+          placeholder="Search mess by name, city or area" class="search-input" />
+      </div>
+    </div>
+
+    <!-- Location Selector -->
+    <div class="location-city">
+      <div class="custom-location-input">
+        <mat-icon class="left-icon">location_on</mat-icon>
+        <input type="text" class="city-input" placeholder="Search by City" [formControl]="cityControl"
+          [matAutocomplete]="auto" />
+      </div>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCitySelected($event)">
+        <mat-option *ngFor="let city of filteredCities" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+    <!-- filter -->
+    <button class="filter-btn" (click)="openMyFilter()">
+      <i class="fas fa-sliders-h"></i>
+      <span>Filter</span>
+    </button>
+
+    <!-- login & singup -->
+    <div class="mainLogoutbutton">
+      <!-- login button register button -->
+      <button class="userLogReg" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!-- image card slider -->
+<div class="background">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let mess of paginatedMessDetails; let i = index">
+        <div class="zomato-card shadow-sm  overflow-hidden">
+
+          <!-- Image Header -->
+          <div class="position-relative zomato-image-container" >
+            <div [id]="'carouselExampleControls' + i" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div *ngFor="let image of mess.messImages; let first = first" class="carousel-item"
+                  [class.active]="first">
+                  <img [src]="image" class="d-block w-100 zomato-image" alt="Mess Image">
+                </div>
+              </div>
+              <a class="carousel-control-prev" role="button" data-slide="prev"
+                [attr.data-target]="'#carouselExampleControls' + i">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" role="button" data-slide="next"
+                [attr.data-target]="'#carouselExampleControls' + i">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div>
+
+            <!-- Rating overlay -->
+            <div class="rating-overlay bg-success text-white px-2 py-1 rounded">
+              <i class="fa fa-star"></i> {{ getRatingDetails(mess.userId) | number: '1.1-1' }}
+            </div>
+          </div>
+
+
+          <!-- Mess Info -->
+          <div class="p-3 bg-white" >
+            <div></div>
+            <!-- Title & Food Type -->
+            <div class="d-flex justify-content-between align-items-center mb-1"
+              (click)="navigateToShowMessInfo(mess.userId)">
+              <h5 class="mb-0 zomato-title">
+                {{ mess.messName }}
+              </h5>
+              <!-- Veg Only -->
+              <span *ngIf="mess?.foodType === 'veg'" class="food-icon veg"></span>
+
+              <!-- Veg & Non-Veg -->
+              <span *ngIf="mess?.foodType === 'vegOrNonVeg'" class="food-icon veg-nonveg"></span>
+
+            </div>
+
+            <!-- Address -->
+            <p class="text-muted mb-2" (click)="navigateToShowMessInfo(mess.userId)">
+              <i class="fa fa-map-marker mr-1"></i>
+              {{ mess.address?.area }}, {{ mess.address?.city }}
+            </p>
+
+            <!-- Timing -->
+            <p class="mb-1 text-font" (click)="navigateToShowMessInfo(mess.userId)">
+              <i class="fa fa-sun-o mr-1"></i>
+              {{ formatTime(getRelatedDetails(mess.userId)?.morning?.from) }} -
+              {{ formatTime(getRelatedDetails(mess.userId)?.morning?.to) }}
+            </p>
+            <p class="text-font" (click)="navigateToShowMessInfo(mess.userId)">
+              <i class="fa fa-moon-o   mr-1"></i>
+              {{ formatTime(getRelatedDetails(mess.userId)?.evening?.from) }} -
+              {{ formatTime(getRelatedDetails(mess.userId)?.evening?.to) }}
+            </p>
+
+            <!-- Status -->
+            <p class="mb-2" (click)="navigateToShowMessInfo(mess.userId)">
+              <span class="badge badge-font" [ngClass]="{
+                'badge-success': getMessStatus(getRelatedDetails(mess.userId)) === 'Open',
+                'badge-warning': getMessStatus(getRelatedDetails(mess.userId)) === 'Opening Soon',
+                'badge-danger': getMessStatus(getRelatedDetails(mess.userId)) === 'Closed',
+                'badge-orange': getMessStatus(getRelatedDetails(mess.userId)) === 'Closing Soon'
+              }">
+                {{ getMessStatus(getRelatedDetails(mess.userId)) }}
+              </span>
+            </p>
+
+            <!-- Contact & Menu Button -->
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <span class="text-muted small" (click)="navigateToShowMessInfo(mess.userId)">
+                <i class="fa fa-phone mr-1"></i>{{ mess.contact?.mobileNumber }}
+              </span>
+              <button class="menu-btn " (click)="onMenuShowList(mess.userId)">
+                menu <span class="arrow-circle"><i class="fas fa-arrow-right"></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="isNotSerachMess">
+    <div class="no-results-container">
+      <div class="no-results-content">
+        <div class="no-result-img"></div>
+        <div class="text-content">
+          <h2>Oops ! No Results Found</h2>
+          <p>We couldn't find any matching your search. Please try a different search</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="paginator-wrapper">
+  <mat-paginator class="custom-paginator" [length]="filteredMessDetails.length" [pageSize]="pageSize"
+    [pageIndex]="pageIndex" [pageSizeOptions]="[6, 12, 24]" (page)="onPageChange($event)" aria-label="Select page">
+  </mat-paginator>
+</div>

@@ -1,0 +1,15 @@
+<!-- Top progress bar -->
+<mat-progress-bar
+  *ngIf="loading$ | async"
+  mode="indeterminate"
+  color="accent"
+  class="progress-bar">
+</mat-progress-bar>
+
+
+<div *ngIf="loading$ | async" class="spinner-overlay">
+<mat-spinner class="custom-spinner"  color="accent " diameter="50"></mat-spinner>
+</div>
+
+
+<router-outlet></router-outlet>

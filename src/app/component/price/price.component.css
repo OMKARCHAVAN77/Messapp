@@ -1,0 +1,82 @@
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 10px 2px ;
+  
+}
+.header h4 {
+  margin: 0;
+  font-size: 26px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #000;
+
+
+}
+
+.logout-btn {
+  padding: 6px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+mat-label{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+
+::ng-deep input.mat-input-element {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+::ng-deep input.mat-input-element::placeholder {
+  font-family: 'Poppins', sans-serif !important;
+}
+.rsIcon{
+  font-size: 20px;
+  padding-left: 15px;
+  font-weight: 400;
+}
+.next-btn:hover {
+  background-color: #3f51b5;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card {
+  border-radius: 16px;
+  
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.form-btn{
+  background-color: #FF8000;
+  color: #ffff;
+  border: none;
+  border-radius: 75px;
+  padding: 6px 25px;
+    font-family: "Poppins", sans-serif;
+}
+.form-btn:hover {
+  background-color: #e99139;
+}

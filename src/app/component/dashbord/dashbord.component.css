@@ -1,0 +1,423 @@
+/* Modern Dashboard Styles with Tailwind-like classes */
+:root {
+  --primary: #0ea5e9;
+  /* Cyan-500 */
+  --primary-light: #e0f2fe;
+  /* Cyan-100 */
+  --success: #00ff5e;
+  /* Green-600 */
+  --success-light: #dcfce7;
+  /* Green-100 */
+  --warning: #f59e0b;
+  /* Amber-500 */
+  --warning-light: #fef9c3;
+  /* Amber-100 */
+  --danger: #fa0808;
+  /* Red-600 */
+  --danger-light: #fee2e2;
+  /* Red-100 */
+  --info: #3b82f6;
+  /* Blue-500 */
+  --info-light: #dbeafe;
+  /* Blue-100 */
+  --dark: #0f172a;
+  /* Slate-900 */
+  --light: #f1f5f9;
+  /* Slate-100 */
+  --gray: #6b7280;
+  /* Gray-500 */
+  --gray-light: #e5e7eb;
+  /* Gray-200 */
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 10px 2px ;
+  
+}
+
+.header h4 {
+  margin: 0;
+  font-size: 26px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #000;
+
+}
+
+.logout-btn {
+  padding: 6px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #fff;
+  min-height: 100vh;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #EDEDED;
+  border: none;
+  margin-bottom: 1.5rem;
+  border-radius: 10px 10px 0 0; 
+}
+
+.card-header .header-content {
+  display: flex;
+  align-items: center;
+}
+
+.card-header .header-content h2 {
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #000000;
+}
+
+
+
+/* Review Section */
+.rating-bars {
+  display: flex;
+  justify-content: center;
+  margin: 35px 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stars {
+  font-size: 35px;
+  display: flex;
+  color: #f4b01e;
+  margin: 15px;
+}
+
+/* For filled stars */
+.pi-star-fill {
+  color: #333 !important;
+  /* Dark gray */
+}
+
+/* For half stars */
+.pi-star-half {
+  color: #333 !important;
+}
+
+/* For empty stars */
+.pi-star {
+  color: #ccc !important;
+}
+
+.rating-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+.rating-out-of {
+  font-size: 1.5rem;
+  color: #666;
+  /* Slightly lighter for the "/5" part */
+}
+
+/* ... rest of your SCSS remains the same ... */
+
+/* Food Section */
+.food-section {
+  .food-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .chart-wrapper {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+    }
+
+    .food-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      width: 100%;
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: var(--light);
+        }
+
+        .legend-dot {
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+          flex-shrink: 0;
+
+          &.veg {
+            background: var(--success);
+          }
+
+          &.nonveg {
+            background: var(--danger);
+          }
+        }
+
+        .legend-text {
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .legend-label {
+          font-size: 0.875rem;
+          color: var(--dark);
+          font-weight: 500;
+        }
+
+        .legend-value {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--dark);
+        }
+      }
+    }
+  }
+}
+
+/* Viewed Section */
+.viewed-section {
+  .view-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 3.5rem);
+
+    .view-count {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .view-trend {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+
+      &.positive {
+        color: var(--success);
+        background-color: var(--success-light);
+      }
+
+      i {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+/* Visit Chart Section */
+.visit-chart-section {
+  width: 100%;
+  margin: auto;
+  height: 700px;
+}
+
+/* Chart Header */
+.visit-chart-section .chart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Responsive behavior */
+@media (min-width: 768px) {
+  .visit-chart-section .chart-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Header Content */
+.visit-chart-section .chart-header .header-content {
+  display: flex;
+  align-items: center;
+}
+
+/* Heading */
+.visit-chart-section .chart-header .header-content h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: var(--dark);
+}
+
+/* Subtitle */
+.visit-chart-section .chart-header .header-content .chart-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--gray);
+}
+
+/* Time Period Selector */
+.time-period-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+}
+
+.time-period-selector .period-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: white;
+  border: 1px solid var(--gray-light);
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-period-selector .period-btn:hover {
+  background: var(--light);
+  color: var(--dark);
+}
+
+.time-period-selector .period-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+/* Chart Container */
+.chart-container {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  padding: 1rem;
+}
+
+.chart-container .chart-content {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-container .loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray);
+}
+
+.chart-container .loading-indicator .spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-container .loading-indicator i {
+  font-size: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+
+  .food-content {
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .time-period-selector {
+    justify-content: flex-start;
+  }
+}
+
+/* Animation for loading spinner */
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,103 @@
+<div class="header">
+  <h4>Time</h4>
+  <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
+</div>
+<div class="">
+  <div class="card p-4 fade-in-up">
+    <form [formGroup]="myTimeForm" (submit)="onTimeDataSubmit()">
+      <div formGroupName="timeDetails">
+        <div class="row">
+          <div class="col-sm-12">
+          </div>
+        </div>
+        <div formGroupName="morning">
+          <div class="row my-1">
+            <div class="col-sm-12">
+              <h5 class="form-header">Morning Time</h5>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Open</mat-label>
+                <input matInput type="time" formControlName="from">
+
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Close</mat-label>
+                <input matInput type="time" formControlName="to">
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="evening">
+          <div class="row my-1">
+            <div class="col-sm-12">
+              <h5 class="form-header">Evening Time</h5>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Open</mat-label>
+                <input matInput type="time" formControlName="from">
+
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Close</mat-label>
+                <input matInput type="time" formControlName="to">
+
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div formGroupName="holiday">
+          <div class="row">
+            <div class="col-sm-12">
+              <h5 class="form-header">Holiday</h5>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Select an option</mat-label>
+                <mat-select formControlName="day">
+                  <mat-option [value]="menu.day" *ngFor="let menu of menuList">
+                    {{menu.day}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12">
+                <div class=" ml-1 d-flex flex-wrap align-items-center gap-3">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio1" name="period" value="full day" formControlName="period"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadio1">Full day</label>
+              </div>
+              <div class="custom-control custom-radio my-2">
+                <input type="radio" id="customRadio2" name="period" value="morning" formControlName="period"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">Only morning</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio3" name="period" value="evening" formControlName="period"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadio3">Only Evening</label>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button d-flex justify-content-end">
+        <button type="submit" class="form-btn" (click)="onTimeDataSubmit()" color="primary">Save</button>
+      </div>
+    </form>
+
+  </div>
+</div>

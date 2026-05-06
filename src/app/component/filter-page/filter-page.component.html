@@ -1,0 +1,54 @@
+<mat-card class="square-corner-card">
+  <div class="row">
+    <div class="col-sm-12 filterTitle">
+      <span class="ml-4 header">Filter</span>
+      <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <!-- Rating Section -->
+  <div class="filter-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h5>Ratings</h5>
+        <hr>
+      </div>
+      <div class="col-sm-12 ratingButton">
+        <button *ngFor="let rating of ratings" class="btn" 
+          [class.btn-secondary]="selectedRating === rating"
+          [class.btn-outline-secondary]="selectedRating !== rating" 
+          (click)="selectRating(rating)">
+          {{ rating === 'Any' ? 'Any Rating' : rating + '+' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Type Section -->
+  <div class="foodType-container my-2">
+    <div class="row">
+      <div class="col-sm-12">
+        <h5>Food Type</h5>
+        <hr>
+      </div>
+      <div class="col-sm-12 foodTypeButton">
+        <button *ngFor="let food of foodTypes" class="btn" 
+          [class.btn-secondary]="selectedFoodType === food"
+          [class.btn-outline-secondary]="selectedFoodType !== food" 
+          (click)="selectFoodType(food)">
+          {{ food }}
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <!-- Action Buttons -->
+  <mat-dialog-actions >
+    <div class="finalButton text-right">
+      <button  class="btn btn-primary" (click)="resetFilters()">clear all</button>
+      <button  class="btn btn-primary" (click)="applyFilters()">Apply </button>
+    </div>
+  </mat-dialog-actions>
+</mat-card>
