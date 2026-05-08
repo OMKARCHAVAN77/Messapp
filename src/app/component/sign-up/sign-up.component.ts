@@ -97,11 +97,10 @@ export class SignUpComponent {
                 
                 }
               },
-              error: (_error: any) => {
-                if (_error.error.success === false) {
-                  this.router.navigate(['layout/dashbord']); // Redirect to Dashboard if login fails
-                
-                }
+             error: (_error: any) => {
+              console.error('Mess details API failed:', _error);
+              // stay on current page
+               this.router.navigate(['ownerdetails']);
               }
             });
           },
