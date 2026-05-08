@@ -19,14 +19,14 @@ export class MessDashboardService {
   //Mess details get Api
   getMessDetailsList() {
     return this.http.get('https://find-food-backend2.vercel.app/api/user/messDetailsData', {
-      withCredentials: true
+      // withCredentials: true
     })
   }
 
   //Menu details get Api
   getMenuDetailsList() {
     return this.http.get('https://find-food-backend2.vercel.app/api/user/menuDetailsData', {
-      withCredentials: true
+      // withCredentials: true
     })
   }
 
@@ -34,7 +34,7 @@ export class MessDashboardService {
   getPriceDetailsList() {
     return this.http.get('https://find-food-backend2.vercel.app/api/user/priceDetailsData',
       {
-        withCredentials: true
+        // withCredentials: true
       }
     )
   }
@@ -42,7 +42,7 @@ export class MessDashboardService {
   //time details get Api
   getTimeDetailsList() {
     return this.http.get('https://find-food-backend2.vercel.app/api/user/timeDetailsData', {
-      withCredentials: true
+      // withCredentials: true
     })
   }
 
@@ -52,28 +52,28 @@ export class MessDashboardService {
   //mess Update Api
 patchMessDetailsList(myMessObj: any) {
   return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveMessDetails', myMessObj, {
-    withCredentials: true
+    // withCredentials: true
   });
 }
   //menu Update Api
   patchMenuDetailsList(myMenuObj: any) {
     // console.log(myMessObj);
     return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveMenuDetails',myMenuObj.menuDetails, {
-      withCredentials:true
+      // withCredentials:true
     })
   }
 
   //Price update Api
   patchPriceDetailsList(myPriceObj: any) {
     return this.http.patch('https://find-food-backend2.vercel.app/api/user/savePriceDetails', myPriceObj, {
-      withCredentials: true
+      // withCredentials: true
     })
   }
 
   //Time update Api
   patchTimeDetailsList(myTimeObj: any) {
     return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveTimeDetails', myTimeObj.timeDetails, {
-      withCredentials: true
+      // withCredentials: true
     })
 }
 }

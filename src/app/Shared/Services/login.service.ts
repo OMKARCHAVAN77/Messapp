@@ -27,7 +27,7 @@ export class LoginService {
       "password": myLoginObj.password,
     }
     return this.http.post(this.myUserLoginApiUrl,payload,{
-      withCredentials:true
+      // withCredentials:true
     })
   }
 }

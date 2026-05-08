@@ -13,7 +13,7 @@ export class RatingViewsChartService {
   myRatingDetailsAPiUrl:string = 'https://find-food-backend2.vercel.app/api/user/getRatingData';
   getRatingDetailsList(){
     return this.http.get(this.myRatingDetailsAPiUrl,{
-      withCredentials:true,
+      // withCredentials:true,
     });
   }
 
@@ -21,7 +21,7 @@ export class RatingViewsChartService {
   myViewApiUrl:string = 'https://find-food-backend2.vercel.app/api/user/getViews';
   getViewsDetailsList(){
     return this.http.get(this.myViewApiUrl,{
-      withCredentials:true,
+      // withCredentials:true,
     })
   }
 
@@ -32,7 +32,7 @@ export class RatingViewsChartService {
     };
   return  this.http
       .post('https://find-food-backend2.vercel.app/api/user/views', payload, {
-        withCredentials: true,
+        // withCredentials: true,
       })   
   }
 }

@@ -10,7 +10,7 @@ export class CustomerService {
 
   getCustomerInMessDetails() {
     return this.http.get(this.myMessDetailsApiUrlInCustomer, {
-      withCredentials: true,
+      // withCredentials: true,
     })
   }
 
@@ -28,7 +28,7 @@ export class CustomerService {
       messUserId: userViewUserId
     }
     return this.http.post(this.myViewApiUrl, payload, {
-      withCredentials: true,
+      // withCredentials: true,
     })
   }
 }
