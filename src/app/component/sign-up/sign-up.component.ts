@@ -76,7 +76,7 @@ export class SignUpComponent {
 
         //login send to the user information
         this.userSignInUpServ.postLoginList(formData).subscribe({
-          next: (_resp: any) => {
+          next: (_resp: any) => {  
             console.log('Login Successful:', _resp);
             localStorage.setItem('userId', _resp.userId);
             localStorage.setItem('role', _resp.role);
@@ -100,7 +100,7 @@ export class SignUpComponent {
              error: (_error: any) => {
               console.error('Mess details API failed:', _error);
               // stay on current page
-               this.router.navigate(['ownerdetails']);
+               this.router.navigate(['customer']);
               }
             });
           },
