@@ -100,7 +100,7 @@ export class SignUpComponent {
              error: (_error: any) => {
               console.error('Mess details API failed:', _error);
               // stay on current page
-               this.router.navigate(['customer']);
+               this.router.navigate(['signup']);
               }
             });
           },
