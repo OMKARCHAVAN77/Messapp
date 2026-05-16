@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessFormDataService {
-  myMessPostDetailsApiUrls: string = 'https://find-food-backend2.vercel.app/api/user/messData';
+
+  private baseUrl: string = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
-  
 
-
-  //Post To The Mess Owner Main Form Api 
+  // ✅ POST — Mess Owner Main Form
   postMessOwnerDetailsList(myMessDetailsObj: any) {
-    return this.http.post(this.myMessPostDetailsApiUrls, myMessDetailsObj,{
-      // withCredentials:true
-    })
+    return this.http.post(`${this.baseUrl}/api/user/messData`, myMessDetailsObj);
+    // ✅ removed withCredentials: true — interceptor handles token
   }
- 
 }

@@ -1,33 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  myUserRegisterApiUrl:string = 'https://find-food-backend2.vercel.app/api/user/register';
 
-  //userId,password,role
+  private baseUrl: string = environment.apiUrl;
 
-  myUserLoginApiUrl:string = 'https://find-food-backend2.vercel.app/api/user/login';
-  //userId,password
-  constructor(private http:HttpClient) { }
-  postRegisterList(myUserObj:any){
-   const myPayLoad ={
-      "userId": myUserObj.emailId,
-      "password": myUserObj.password,
-      "role": myUserObj.role,
-    }
-    return this.http.post(this.myUserRegisterApiUrl,myPayLoad)
+  constructor(private http: HttpClient) { }
+
+  // ✅ POST — Register
+  postRegisterList(myUserObj: any) {
+    const payload = {
+      userId: myUserObj.emailId,
+      password: myUserObj.password,
+      role: myUserObj.role
+    };
+    return this.http.post(`${this.baseUrl}/api/user/register`, payload);
   }
 
-  postLoginList(myLoginObj:any){
+  // ✅ POST — Login
+  postLoginList(myLoginObj: any) {
     const payload = {
-      "userId": myLoginObj.emailId,
-      "password": myLoginObj.password,
-    }
-    return this.http.post(this.myUserLoginApiUrl,payload,{
-      // withCredentials:true
-    })
+      userId: myLoginObj.emailId,
+      password: myLoginObj.password
+    };
+    return this.http.post(`${this.baseUrl}/api/user/login`, payload);
+    // ✅ removed withCredentials: true — not needed for JWT login
   }
 }

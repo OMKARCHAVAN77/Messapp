@@ -1,79 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessDashboardService {
-  myMessPostDetailsApiUrls: string = 'https://find-food-backend2.vercel.app/api/user/messData';
+
+  private baseUrl: string = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
-
-  //Post To The Mess Owner Main Form Api 
+  // ✅ POST — Mess Owner Main Form (fixed: was changed to GET by mistake)
   postMessOwnerDetailsList(myMessDetailsObj: any) {
-    return this.http.post(this.myMessPostDetailsApiUrls, myMessDetailsObj)
+    return this.http.post(`${this.baseUrl}/api/user/messData`, myMessDetailsObj);
   }
 
-  //Only All Get Api Link :- 
-
-  //Mess details get Api
+  // ✅ GET — Mess details
   getMessDetailsList() {
-    return this.http.get('https://find-food-backend2.vercel.app/api/user/messDetailsData', {
-      // withCredentials: true
-    })
+    return this.http.get(`${this.baseUrl}/api/user/messDetailsData`);
   }
 
-  //Menu details get Api
+  // ✅ GET — Menu details
   getMenuDetailsList() {
-    return this.http.get('https://find-food-backend2.vercel.app/api/user/menuDetailsData', {
-      // withCredentials: true
-    })
+    return this.http.get(`${this.baseUrl}/api/user/menuDetailsData`);
   }
 
-  //price details get Api
+  // ✅ GET — Price details
   getPriceDetailsList() {
-    return this.http.get('https://find-food-backend2.vercel.app/api/user/priceDetailsData',
-      {
-        // withCredentials: true
-      }
-    )
+    return this.http.get(`${this.baseUrl}/api/user/priceDetailsData`);
   }
 
-  //time details get Api
+  // ✅ GET — Time details
   getTimeDetailsList() {
-    return this.http.get('https://find-food-backend2.vercel.app/api/user/timeDetailsData', {
-      // withCredentials: true
-    })
+    return this.http.get(`${this.baseUrl}/api/user/timeDetailsData`);
   }
 
+  // ✅ PATCH — Mess update
+  patchMessDetailsList(myMessObj: any) {
+    return this.http.patch(`${this.baseUrl}/api/user/saveMessDetails`, myMessObj);
+  }
 
-  // Patch Api
-
-  //mess Update Api
-patchMessDetailsList(myMessObj: any) {
-  return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveMessDetails', myMessObj, {
-    // withCredentials: true
-  });
-}
-  //menu Update Api
+  // ✅ PATCH — Menu update
   patchMenuDetailsList(myMenuObj: any) {
-    // console.log(myMessObj);
-    return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveMenuDetails',myMenuObj.menuDetails, {
-      // withCredentials:true
-    })
+    return this.http.patch(`${this.baseUrl}/api/user/saveMenuDetails`, myMenuObj.menuDetails);
   }
 
-  //Price update Api
+  // ✅ PATCH — Price update
   patchPriceDetailsList(myPriceObj: any) {
-    return this.http.patch('https://find-food-backend2.vercel.app/api/user/savePriceDetails', myPriceObj, {
-      // withCredentials: true
-    })
+    return this.http.patch(`${this.baseUrl}/api/user/savePriceDetails`, myPriceObj);
   }
 
-  //Time update Api
+  // ✅ PATCH — Time update
   patchTimeDetailsList(myTimeObj: any) {
-    return this.http.patch('https://find-food-backend2.vercel.app/api/user/saveTimeDetails', myTimeObj.timeDetails, {
-      // withCredentials: true
-    })
-}
+    return this.http.patch(`${this.baseUrl}/api/user/saveTimeDetails`, myTimeObj.timeDetails);
+  }
 }

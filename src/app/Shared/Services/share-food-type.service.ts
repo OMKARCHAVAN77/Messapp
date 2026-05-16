@@ -1,12 +1,11 @@
-  import { Injectable } from '@angular/core';
-  import { BehaviorSubject, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class ShareFoodTypeService {
-    private foodTypeSubject = new BehaviorSubject<any>(null);  // Starts with null
-
+@Injectable({
+  providedIn: 'root'
+})
+export class ShareFoodTypeService {
+  private foodTypeSubject = new BehaviorSubject<any>(null);
   sharedObservable$ = this.foodTypeSubject.asObservable();
 
   constructor() { }
@@ -18,4 +17,4 @@
   getFoodType() {
     return this.sharedObservable$;
   }
-  }
+}

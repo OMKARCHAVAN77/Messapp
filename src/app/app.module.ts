@@ -77,6 +77,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: 'three-strings',
@@ -179,6 +181,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     },
     provideAnimationsAsync()

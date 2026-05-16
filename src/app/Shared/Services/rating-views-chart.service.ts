@@ -1,38 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingViewsChartService {
 
-  constructor(private http:HttpClient) { }
+  private baseUrl: string = environment.apiUrl;
 
-  //this only rating api use to the profile and dashboard
-  //rating part get in Owner
-  myRatingDetailsAPiUrl:string = 'https://find-food-backend2.vercel.app/api/user/getRatingData';
-  getRatingDetailsList(){
-    return this.http.get(this.myRatingDetailsAPiUrl,{
-      // withCredentials:true,
-    });
+  constructor(private http: HttpClient) { }
+
+  // ✅ GET — Rating data for owner dashboard
+  getRatingDetailsList() {
+    return this.http.get(`${this.baseUrl}/api/user/getRatingData`);
   }
 
-  //Views Part Get in Owner
-  myViewApiUrl:string = 'https://find-food-backend2.vercel.app/api/user/getViews';
-  getViewsDetailsList(){
-    return this.http.get(this.myViewApiUrl,{
-      // withCredentials:true,
-    })
+  // ✅ GET — Views data for owner dashboard
+  getViewsDetailsList() {
+    return this.http.get(`${this.baseUrl}/api/user/getViews`);
   }
 
-
-  getViewsPeriodForChart(period:any) {
-    const payload = {
-      period: period,
-    };
-  return  this.http
-      .post('https://find-food-backend2.vercel.app/api/user/views', payload, {
-        // withCredentials: true,
-      })   
+  // ✅ POST — Views chart by period
+  getViewsPeriodForChart(period: any) {
+    const payload = { period: period };
+    return this.http.post(`${this.baseUrl}/api/user/views`, payload);
   }
 }

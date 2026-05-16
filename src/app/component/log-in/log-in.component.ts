@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginService } from '../../Shared/Services/login.service';
 import { AgainLoginService } from '../../Shared/Services/again-login.service';
@@ -14,24 +13,30 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './log-in.component.css'
 })
 export class LogInComponent {
+
   hidePassword: boolean = true;
   myLoginForm!: FormGroup;
   captcha: string = '';
 
-   // focus in first Input tag
-    @ViewChild('email', { read: MatInput }) emailMatInput!: MatInput;
-    @ViewChild('email') emailElementRef!: ElementRef;
-    
+  @ViewChild('email', { read: MatInput }) emailMatInput!: MatInput;
+  @ViewChild('email') emailElementRef!: ElementRef;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
-  constructor(private fb: FormBuilder, private tostrServ: ToastrService, private loginserve:LoginService , private router: Router, private http: HttpClient, private againLoginServ: AgainLoginService) { }
+
+  constructor(
+    private fb: FormBuilder,
+    private tostrServ: ToastrService,
+    private loginserve: LoginService,
+    private router: Router,
+    private http: HttpClient,
+    private againLoginServ: AgainLoginService
+  ) { }
 
   ngOnInit(): void {
     this.initialLoginForm();
     this.generateCaptcha();
   }
 
-   ngAfterViewInit(): void {
-    // Focus after view is initialized
+  ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.emailInput) {
         this.emailInput.nativeElement.focus();
@@ -39,109 +44,78 @@ export class LogInComponent {
     });
   }
 
-
   initialLoginForm() {
     this.myLoginForm = this.fb.group({
-      emailId: this.fb.control('', [Validators.required, Validators.email]),
-      password: this.fb.control('', [Validators.required, Validators.minLength(4)]),
+      emailId: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       captchaInput: ['', [Validators.required]]
-    })
+    });
   }
 
   generateCaptcha() {
     this.captcha = Math.random().toString(36).substring(2, 8).toUpperCase();
   }
 
-  // onSubmit() {
-  //   console.log('Registration Successful:', this.myLoginForm.value);
-  //   if (this.myLoginForm.value.captchaInput !== this.captcha) {
-      
-  //     this.generateCaptcha();
-  //   } else {
-  //     //debugger
-  //     this.loginserve.postLoginList(this.myLoginForm.value).subscribe({
-  //       next: (_resp: any) => {
-  //         localStorage.setItem('userId', _resp.userId);
-  //         localStorage.setItem('role', _resp.role);
-  //         localStorage.setItem('token', _resp.data);
+  onSubmit() {
+    // ✅ Stop if form is invalid
+    if (this.myLoginForm.invalid) return;
 
-  //         this.againLoginServ.getMessLoginDetails().subscribe({
-  //           next: (_apiResp: any) => {
-  //               this.tostrServ.success('Login successfuly');
-  //             console.log('Login Successful:', _resp);
-  //             if (_apiResp.success === true && _resp.role === 'Mess Owner') {
-                 
-  //               this.router.navigate(['ownerdetails']); // Mess Owner Form 
-                
-
-  //             } else if (_apiResp.success === true && _resp.role === 'Customer') {
-  //                  this.tostrServ.success('Login successfuly');
-  //               this.router.navigate(['customer']);
-
-  //             }
-  //           },
-  //           error: (_error: any) => {
-  //             if (_error.error.success === false) {
-  //               this.router.navigate(['layout/dashbord']); // Redirect to Dashboard if login fails
-
-  //             }
-  //           }
-  //         });
-  //       },
-  //       error: (_error: any) => {
-  //           this.tostrServ.error('Login falied');
-  //         console.log('Login Failed', _error);
-
-  //       }
-  //     });
-  //     this.myLoginForm.markAllAsTouched();
-  //     this.myLoginForm.reset();
-  //   }
-  // }
-
-
-
-
-   onSubmit() {
-    console.log('Login Successful:', this.myLoginForm.value);
+    // ✅ Check CAPTCHA
     if (this.myLoginForm.value.captchaInput !== this.captcha) {
+      this.tostrServ.error('Invalid CAPTCHA, please try again');
       this.generateCaptcha();
-    } else {
-      this.loginserve.postLoginList(this.myLoginForm.value).subscribe({
-        next: (_resp: any) => {
-          localStorage.setItem('userId', _resp.userId);
-          localStorage.setItem('role', _resp.role);
-          localStorage.setItem('token', _resp.data);
-
-          this.againLoginServ.getMessLoginDetails().subscribe({
-            next: (_apiResp: any) => {
-              console.log('Login Successful:', _resp);
-              if (_apiResp.success === true && _resp.role === 'Mess Owner') {
-                this.router.navigate(['messOwnerDetails']); // Mess Owner Form 
-                this.tostrServ.success('Mess Owner Login Successful...');
-              } else if (_apiResp.success === true && _resp.role === 'Customer') {
-                this.router.navigate(['customer']);
-                this.tostrServ.success('Customer Login Successful...');
-              }
-            },
-            error: (_error: any) => {
-              if (_error.error.success === false) {
-                this.router.navigate(['layout/dashbord']); // Redirect to Dashboard if login fails
-                this.tostrServ.success('Login Successful...');
-              }
-            }
-          });
-        },
-        error: (_error: any) => {
-          console.log('Login Failed', _error);
-          this.tostrServ.error('Login Failed...');
-        }
-      });
-      this.myLoginForm.markAllAsTouched();
-      this.myLoginForm.reset();
+      return;
     }
+
+    this.loginserve.postLoginList(this.myLoginForm.value).subscribe({
+      next: (_resp: any) => {
+
+        // ✅ Save to localStorage
+        localStorage.setItem('userId', _resp.userId);
+        localStorage.setItem('role', _resp.role);
+        localStorage.setItem('token', _resp.data);
+
+        // ✅ Reset form inside next callback
+        this.myLoginForm.reset();
+
+        // ✅ Admin — navigate directly, skip mess API
+        if (_resp.role === 'Admin') {
+          this.router.navigate(['layout/dashbord']);
+          this.tostrServ.success('Admin Login Successful...');
+          return;
+        }
+
+        // ✅ Mess Owner / Customer — check mess API
+        this.againLoginServ.getMessLoginDetails().subscribe({
+          next: (_apiResp: any) => {
+
+            if (_apiResp.success === true && _resp.role === 'Mess Owner') {
+              this.router.navigate(['ownerdetails']); // ✅ fixed route
+              this.tostrServ.success('Mess Owner Login Successful...');
+
+            } else if (_apiResp.success === true && _resp.role === 'Customer') {
+              this.router.navigate(['customer']);
+              this.tostrServ.success('Customer Login Successful...');
+            }
+
+          },
+          error: (_error: any) => {
+            if (_error.error?.success === false && _resp.role === 'Mess Owner') {
+              // New Mess Owner — no mess form filled yet
+              this.router.navigate(['layout/dashbord']);
+              this.tostrServ.info('Please complete your Mess details.');
+            } else {
+              this.router.navigate(['layout/dashbord']);
+              this.tostrServ.success('Login Successful...');
+            }
+          }
+        });
+
+      },
+      error: (_error: any) => {
+        console.log('Login Failed', _error);
+        this.tostrServ.error('Login Failed. Please check your credentials.');
+      }
+    });
   }
-
-
-  
 }
