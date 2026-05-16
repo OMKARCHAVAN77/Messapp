@@ -57,65 +57,57 @@ export class LogInComponent {
   }
 
   onSubmit() {
-    // ✅ Stop if form is invalid
-    if (this.myLoginForm.invalid) return;
+  if (this.myLoginForm.invalid) return;
 
-    // ✅ Check CAPTCHA
-    if (this.myLoginForm.value.captchaInput !== this.captcha) {
-      this.tostrServ.error('Invalid CAPTCHA, please try again');
-      this.generateCaptcha();
-      return;
-    }
+  if (this.myLoginForm.value.captchaInput !== this.captcha) {
+    this.tostrServ.error('Invalid CAPTCHA, please try again');
+    this.generateCaptcha();
+    return;
+  }
 
-    this.loginserve.postLoginList(this.myLoginForm.value).subscribe({
-      next: (_resp: any) => {
+  this.loginserve.postLoginList(this.myLoginForm.value).subscribe({
+    next: (_resp: any) => {
+      localStorage.setItem('userId', _resp.userId);
+      localStorage.setItem('role', _resp.role);
+      localStorage.setItem('token', _resp.data);
+      this.myLoginForm.reset();
 
-        // ✅ Save to localStorage
-        localStorage.setItem('userId', _resp.userId);
-        localStorage.setItem('role', _resp.role);
-        localStorage.setItem('token', _resp.data);
+      // ✅ Admin — skip mess API
+      if (_resp.role === 'Admin') {
+        this.router.navigate(['layout/dashbord']);
+        this.tostrServ.success('Admin Login Successful...');
+        return;
+      }
 
-        // ✅ Reset form inside next callback
-        this.myLoginForm.reset();
+      // ✅ Customer — skip mess API, go directly
+      if (_resp.role === 'Customer') {
+        this.router.navigate(['customer']);
+        this.tostrServ.success('Customer Login Successful...');
+        return;
+      }
 
-        // ✅ Admin — navigate directly, skip mess API
-        if (_resp.role === 'Admin') {
-          this.router.navigate(['layout/dashbord']);
-          this.tostrServ.success('Admin Login Successful...');
-          return;
-        }
-
-        // ✅ Mess Owner / Customer — check mess API
+      // ✅ Only Mess Owner calls this API
+      if (_resp.role === 'Mess Owner') {
         this.againLoginServ.getMessLoginDetails().subscribe({
           next: (_apiResp: any) => {
-
-            if (_apiResp.success === true && _resp.role === 'Mess Owner') {
-              this.router.navigate(['ownerdetails']); // ✅ fixed route
+            if (_apiResp.success === true) {
+              this.router.navigate(['ownerdetails']);
               this.tostrServ.success('Mess Owner Login Successful...');
-
-            } else if (_apiResp.success === true && _resp.role === 'Customer') {
-              this.router.navigate(['customer']);
-              this.tostrServ.success('Customer Login Successful...');
             }
-
           },
           error: (_error: any) => {
-            if (_error.error?.success === false && _resp.role === 'Mess Owner') {
-              // New Mess Owner — no mess form filled yet
-              this.router.navigate(['layout/dashbord']);
-              this.tostrServ.info('Please complete your Mess details.');
-            } else {
-              this.router.navigate(['layout/dashbord']);
-              this.tostrServ.success('Login Successful...');
-            }
+            // New Mess Owner — no mess form filled yet
+            this.router.navigate(['layout/dashbord']);
+            this.tostrServ.info('Please complete your Mess details.');
           }
         });
-
-      },
-      error: (_error: any) => {
-        console.log('Login Failed', _error);
-        this.tostrServ.error('Login Failed. Please check your credentials.');
       }
-    });
-  }
+
+    },
+    error: (_error: any) => {
+      console.log('Login Failed', _error);
+      this.tostrServ.error('Login Failed. Please check your credentials.');
+    }
+  });
+}
 }
