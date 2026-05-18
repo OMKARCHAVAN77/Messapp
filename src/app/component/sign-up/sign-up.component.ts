@@ -79,52 +79,42 @@ export class SignUpComponent {
           localStorage.setItem('token', _resp.data);
 
           this.myRegisterForm.reset(); // ✅ reset inside next
-          if(_resp.Success){
-            this.toastrServ.success('User Register Successful...');
 
-            this.router.navigate(['login']);
-          }else{
-            this.toastrServ.success(_resp.msg);
-            
+          // ✅ Customer — skip mess API, go directly
+          if (_resp.role === 'Customer') {
+            this.router.navigate(['customer']);
+            this.toastrServ.success('Customer Register Successful...');
+            return;
           }
 
-          // // ✅ Customer — skip mess API, go directly
-          // if (_resp.role === 'Customer') {
-          //   this.router.navigate(['customer']);
-          //   this.toastrServ.success('Customer Register Successful...');
-          //   return;
-          // }
-
-          // // ✅ Mess Owner — check if has data
-          // if (_resp.role === 'Mess Owner') {
-          //   this.againLoginServ.getMessLoginDetails().subscribe({
-          //     next: (_apiResp: any) => {
-          //       if (_apiResp.success === true) {
-          //         // existing owner
-          //         this.router.navigate(['layout/dashbord']);
-          //         this.toastrServ.success('Welcome Back!');
-          //       }
-          //     },
-          //     error: (_error: any) => {
-          //       // ✅ New owner — go fill form
-          //       this.router.navigate(['ownerdetails']);
-          //       this.toastrServ.success('Registration Successful! Please fill Mess details.');
-          //     }
-            // });
-    //       }
-    //     },
-    //     error: (loginError: any) => {
-    //       console.error('Login Failed:', loginError);
-    //       this.toastrServ.error('Login Failed...');
-    //     }
-    //   });
-    // },
-    // error: (_error: any) => {
-    //   console.error('Registration Failed:', _error);
-    //   this.toastrServ.error('Registration Failed...');
+          // ✅ Mess Owner — check if has data
+          if (_resp.role === 'Mess Owner') {
+            this.againLoginServ.getMessLoginDetails().subscribe({
+              next: (_apiResp: any) => {
+                if (_apiResp.success === true) {
+                  // existing owner
+                  this.router.navigate(['layout/dashbord']);
+                  this.toastrServ.success('Welcome Back!');
+                }
+              },
+              error: (_error: any) => {
+                // ✅ New owner — go fill form
+                this.router.navigate(['ownerdetails']);
+                this.toastrServ.success('Registration Successful! Please fill Mess details.');
+              }
+            });
+          }
+        },
+        error: (loginError: any) => {
+          console.error('Login Failed:', loginError);
+          this.toastrServ.error('Login Failed...');
+        }
+      });
+    },
+    error: (_error: any) => {
+      console.error('Registration Failed:', _error);
+      this.toastrServ.error('Registration Failed...');
     }
   });
 }
-});
- }
 }
