@@ -97,7 +97,7 @@ export class LogInComponent {
           },
           error: (_error: any) => {
             // New Mess Owner — no mess form filled yet
-            this.router.navigate(['layout/dashbord']);
+            this.router.navigate(['ownerdetails']);
             this.tostrServ.info('Please complete your Mess details.');
           }
         });
