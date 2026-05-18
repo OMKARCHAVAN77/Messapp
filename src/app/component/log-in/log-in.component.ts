@@ -56,11 +56,11 @@ export class LogInComponent {
     this.captcha = Math.random().toString(36).substring(2, 8).toUpperCase();
   }
 
-  onSubmit() {
+ onSubmit() {
   if (this.myLoginForm.invalid) return;
 
   if (this.myLoginForm.value.captchaInput !== this.captcha) {
-    this.tostrServ.error('Invalid CAPTCHA, please try again');
+    this.tostrServ.error('Invalid CAPTCHA');
     this.generateCaptcha();
     return;
   }
@@ -72,40 +72,25 @@ export class LogInComponent {
       localStorage.setItem('token', _resp.data);
       this.myLoginForm.reset();
 
-      // ✅ Admin — skip mess API
       if (_resp.role === 'Admin') {
         this.router.navigate(['layout/dashbord']);
         this.tostrServ.success('Admin Login Successful...');
         return;
       }
 
-      // ✅ Customer — skip mess API, go directly
       if (_resp.role === 'Customer') {
         this.router.navigate(['customer']);
         this.tostrServ.success('Customer Login Successful...');
         return;
       }
 
-      // ✅ Only Mess Owner calls this API
       if (_resp.role === 'Mess Owner') {
-        this.againLoginServ.getMessLoginDetails().subscribe({
-          next: (_apiResp: any) => {
-            if (_apiResp.success === true) {
-              this.router.navigate(['ownerdetails']);
-              this.tostrServ.success('Mess Owner Login Successful...');
-            }
-          },
-          error: (_error: any) => {
-            // New Mess Owner — no mess form filled yet
-            this.router.navigate(['ownerdetails']);
-            this.tostrServ.info('Please complete your Mess details.');
-          }
-        });
+        // ✅ Always go to ownerdetails — API result doesn't matter
+        this.router.navigate(['ownerdetails']);
+        this.tostrServ.success('Mess Owner Login Successful...');
       }
-
     },
     error: (_error: any) => {
-      console.log('Login Failed', _error);
       this.tostrServ.error('Login Failed. Please check your credentials.');
     }
   });
