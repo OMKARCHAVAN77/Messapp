@@ -85,9 +85,27 @@ export class LogInComponent {
       }
 
       if (_resp.role === 'Mess Owner') {
-        // ✅ Always go to ownerdetails — API result doesn't matter
-        this.router.navigate(['ownerdetails']);
-        this.tostrServ.success('Mess Owner Login Successful...');
+        // ✅ Check if owner already has mess data
+        this.againLoginServ.getMessLoginDetails().subscribe({
+          next: (_apiResp: any) => {
+            if (_apiResp.success === true) {
+              // ✅ Existing owner — has data — go to dashboard
+              this.router.navigate(['layout/dashbord']);
+              this.tostrServ.success('Welcome Back!');
+            }
+          },
+          error: (_error: any) => {
+            if (_error.status === 400) {
+              // ✅ New owner — no data yet — go fill form
+              this.router.navigate(['ownerdetails']);
+              this.tostrServ.info('Please complete your Mess details.');
+            } else {
+              // ✅ Any other error — still go to ownerdetails
+              this.router.navigate(['ownerdetails']);
+              this.tostrServ.info('Please complete your Mess details.');
+            }
+          }
+        });
       }
     },
     error: (_error: any) => {
