@@ -62,62 +62,59 @@ export class SignUpComponent {
     }
   }
 
-  onSubmit() {
-    console.log('Registration Successful:', this.myRegisterForm.value);
+ onSubmit() {
+  if (this.myRegisterForm.invalid) return;
 
-    // Store form values before any potential reset
-    const formData = { ...this.myRegisterForm.value };
+  const formData = { ...this.myRegisterForm.value };
 
-    // user send register information
-    this.userSignInUpServ.postRegisterList(formData).subscribe({
-      next: (_resp: any) => {
-        console.log('Registration Successful:', _resp);
-        // this.toastrServ.success('Registration Successfully...');
+  this.userSignInUpServ.postRegisterList(formData).subscribe({
+    next: (_resp: any) => {
+      console.log('Registration Successful:', _resp);
 
-        //login send to the user information
-        this.userSignInUpServ.postLoginList(formData).subscribe({
-          next: (_resp: any) => {  
-            console.log('Login Successful:', _resp);
-            localStorage.setItem('userId', _resp.userId);
-            localStorage.setItem('role', _resp.role);
-            localStorage.setItem('token', _resp.data);
-            // this.toastrServ.success('Login Successful...');
+      this.userSignInUpServ.postLoginList(formData).subscribe({
+        next: (_resp: any) => {
+          console.log('Login Successful:', _resp);
+          localStorage.setItem('userId', _resp.userId);
+          localStorage.setItem('role', _resp.role);
+          localStorage.setItem('token', _resp.data);
 
-            //login get part
+          this.myRegisterForm.reset(); // ✅ reset inside next
+
+          // ✅ Customer — skip mess API, go directly
+          if (_resp.role === 'Customer') {
+            this.router.navigate(['customer']);
+            this.toastrServ.success('Customer Register Successful...');
+            return;
+          }
+
+          // ✅ Mess Owner — check if has data
+          if (_resp.role === 'Mess Owner') {
             this.againLoginServ.getMessLoginDetails().subscribe({
               next: (_apiResp: any) => {
-                console.log('Login Successful:', _resp);
-                if (_apiResp.success === true && _resp.role === 'Mess Owner') {
-                   this.toastrServ.success('Mess Owner Register Successful...');
-                  this.router.navigate(['ownerdetails']); // Mess Owner Form 
-                 
-                } else if (_apiResp.success === true && _resp.role === 'Customer') {
-                  this.router.navigate(['customer']);
-                  this.toastrServ.success('Customer Register Successful...');
-                
+                if (_apiResp.success === true) {
+                  // existing owner
+                  this.router.navigate(['layout/dashbord']);
+                  this.toastrServ.success('Welcome Back!');
                 }
               },
-             error: (_error: any) => {
-              console.error('Mess details API failed:', _error);
-              // stay on current page
-               this.router.navigate(['signup']);
+              error: (_error: any) => {
+                // ✅ New owner — go fill form
+                this.router.navigate(['ownerdetails']);
+                this.toastrServ.success('Registration Successful! Please fill Mess details.');
               }
             });
-          },
-          error: (loginError: any) => {
-            console.error('Login Failed:', loginError);
-                  this.toastrServ.error('Login Failed...');
           }
-        });
-      },
-      error: (_error: any) => {
-             this.toastrServ.error('Registration Failed...');
-        console.error('Registration Failed:', _error);
-      }
-    });
-
-    this.myRegisterForm.markAllAsTouched();
-    // Move reset to after login is complete or remove it if you navigate away
-    // this.myRegisterForm.reset();
-  }
+        },
+        error: (loginError: any) => {
+          console.error('Login Failed:', loginError);
+          this.toastrServ.error('Login Failed...');
+        }
+      });
+    },
+    error: (_error: any) => {
+      console.error('Registration Failed:', _error);
+      this.toastrServ.error('Registration Failed...');
+    }
+  });
+}
 }
