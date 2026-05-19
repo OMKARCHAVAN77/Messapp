@@ -378,21 +378,42 @@ export class OwnerdetailsComponent implements OnInit {
   }
 
   onMessDetailsSubmit() {
-    console.log(this.myMessForm.value);
+  console.log('Submitted Payload >>>', this.myMessForm.value);
 
-    this.messDetailsServ
-      .postMessOwnerDetailsList(this.myMessForm.value)
-      .subscribe({
-        next: (response: any) => {
-          console.log('Success:', response);
-
+  this.messDetailsServ
+    .postMessOwnerDetailsList(this.myMessForm.value)
+    .subscribe({
+      next: (response: any) => {
+        console.log('Success:', response);
+        this.router.navigate(['layout/dashbord']);
+      },
+      error: (error: any) => {
+        console.error('Submit Error:', error);
+        if (error.status === 504) {
+          // ✅ Backend timeout — retry automatically
+          setTimeout(() => {
+            this.messDetailsServ
+              .postMessOwnerDetailsList(this.myMessForm.value)
+              .subscribe({
+                next: (response: any) => {
+                  console.log('Retry Success:', response);
+                  this.router.navigate(['layout/dashbord']);
+                },
+                error: (err: any) => {
+                  console.error('Retry failed:', err);
+                  alert('Please click Submit again');
+                }
+              });
+          }, 3000); // wait 3 seconds then retry
+        } else if (error.status === 400) {
+          // ✅ Data already exists — go to dashboard
           this.router.navigate(['layout/dashbord']);
-        },
-        error: (error: any) => {
-          console.error('Error:', error);
-        },
-      });
-  }
+        } else {
+          alert('Error: ' + (error.error?.msg || 'Please try again'));
+        }
+      },
+    });
+}
 
   removeLicenseImage(): void {
     this.licenseImagePreview = null;
