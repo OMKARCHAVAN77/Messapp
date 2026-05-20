@@ -7,6 +7,12 @@
           <div class="row">
             <div class="col-sm-12 carouselImage">
               <div [id]="'carouselExampleControls'" class="carousel slide" data-ride="carousel">
+
+                <!-- ✅ CLOSE BUTTON ADDED HERE -->
+                <button class="close-btn" (click)="goBack()" aria-label="Close">
+                  <i class="fa fa-times"></i>
+                </button>
+
                 <div class="carousel-inner">
                   <div *ngFor="let image of messInfo?.messImages; let first = first" class="carousel-item"
                     [class.active]="first">
@@ -44,12 +50,10 @@
               </div>
 
               <div class="col-2">
-
                 <i class="fa fa-bookmark custom-bookmark"></i>
-
               </div>
-
             </div>
+
             <div class="row">
               <!-- Ratings -->
               <div class="rating-section-custom align-items-center">
@@ -60,18 +64,18 @@
               </div>
               <div class="mt-2">
                 <span *ngIf="messInfo?.foodType === 'veg'" class="food-icon veg"></span>
-                <!-- Veg & Non-Veg -->
                 <span *ngIf="messInfo?.foodType === 'vegOrNonVeg'" class="food-icon veg-nonveg"></span>
               </div>
             </div>
+
             <!-- Status -->
             <div class="row align-items-center mb-2">
               <div class="col-auto ">
                 <h6 class="status" [ngClass]="{
-          'text-success': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Open',
-          'text-warning': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Opening Soon',
-          'text-danger': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Closed',
-          'text-orange': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Closing Soon'  }">
+                  'text-success': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Open',
+                  'text-warning': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Opening Soon',
+                  'text-danger': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Closed',
+                  'text-orange': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Closing Soon' }">
                   {{ getMessStatus(getRelatedDetails(messInfo.userId)) }}
                 </h6>
               </div>
@@ -90,8 +94,6 @@
               </div>
             </div>
 
-
-
             <!-- Contact, Direction, Share -->
             <div class="d-flex flex-wrap align-items-center my-2 gap-2">
               <button class="btn btn-sm contact-btn">
@@ -109,19 +111,15 @@
 
             <!-- Feedback and Notify -->
             <div class="d-flex flex-wrap gap-2">
-              <!-- Feedback Button -->
               <p-button (onClick)="showDialog()" class="custom-feedback-btn" label="Feedback" icon="pi pi-comments"
                 iconPos="left">
               </p-button>
 
-              <!-- Login/Register Dialog -->
               <p-dialog [(visible)]="visible" [modal]="true" [closable]="true" [style]="{ width: '25rem' }"
-                [baseZIndex]="10000" [contentStyle]="{ 'text-align': 'center',}" styleClass="no-padding-dialog">
+                [baseZIndex]="10000" [contentStyle]="{ 'text-align': 'center' }" styleClass="no-padding-dialog">
                 <div class="custom-dialog-content">
                   <div class="dialog-img"></div>
-                
                   <p class="dialog-subtitle">Please Login or Register</p>
-
                   <button class="btn-sign-in w-100 mb-2" (click)="onLoginButton()">Sign In</button>
                   <button class="btn-register w-100" (click)="onRegisternButton()">Register</button>
                 </div>
@@ -131,6 +129,7 @@
                 <i class="fa fa-bell-o mr-1"></i> Notify Mess Owner
               </button>
             </div>
+
           </mat-card-content>
         </mat-card>
       </div>
