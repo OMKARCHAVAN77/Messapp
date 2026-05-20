@@ -4,22 +4,18 @@
     <div class="col-sm-8 d-none d-sm-block p-0">
       <div class="image-side"></div>
     </div>
-
     <!-- Right Login Form -->
     <div class="col-sm-4 col-12 p-0">
-      <div class="registerContainer ">
+      <div class="registerContainer">
         <form [formGroup]="myLoginForm" (ngSubmit)="onSubmit()" class="w-100">
           <div class="logo-bg"></div>
-          <div class="Welcome text-center">
-            Welcome Back !
-          </div>
+          <div class="Welcome text-center">Welcome Back !</div>
 
           <mat-form-field appearance="outline">
             <mat-label>Your Email</mat-label>
             <input matInput formControlName="emailId" placeholder="jamesphil@gmail.com" #emailInput>
             <mat-icon matSuffix>email</mat-icon>
           </mat-form-field>
-
 
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
@@ -35,7 +31,7 @@
           </div>
 
           <!-- Captcha -->
-          <div class="captcha-container ">
+          <div class="captcha-container">
             <div class="captcha-code mb-1">{{ captcha }}</div>
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Enter Captcha</mat-label>
@@ -46,15 +42,14 @@
           <!-- Login Button -->
           <button type="submit" class="btn loginbtn full-width">Login</button>
 
-          <div class="divider-with-text  my-2">or Login With</div>
+          <div class="divider-with-text my-2">or Login With</div>
 
-          <!-- Google Button -->
-          <div class="googleLink">
+          <!-- ✅ Google Button -->
+          <div class="googleLink" (click)="signInWithGoogle()">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo"
               class="google-icon">
-            <a class="text" href="https://www.google.com/" target="_blank"><span>Continue with Google</span></a>
+            <span class="text">Continue with Google</span>
           </div>
-
 
           <!-- Register Link -->
           <div class="loginAchorTag text-center">
