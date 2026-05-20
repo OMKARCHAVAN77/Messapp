@@ -17,7 +17,7 @@ mat-card {
 
 .carouselImage {
   padding: 10px 30px;
-  position: relative; /* ✅ ADDED - needed for close button positioning */
+  position: relative;
 }
 
 .custom-carousel-img {
@@ -27,12 +27,12 @@ mat-card {
   object-fit: cover;
 }
 
-/* ✅ CLOSE BUTTON - ADDED */
+/* ✅ CLOSE BUTTON */
 .close-btn {
   position: absolute;
   top: 18px;
-  right: 18px;
-  z-index: 100;
+  right: 38px;
+  z-index: 999;
   width: 34px;
   height: 34px;
   border-radius: 50%;

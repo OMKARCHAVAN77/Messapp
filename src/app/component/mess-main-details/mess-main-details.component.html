@@ -6,13 +6,13 @@
           <!-- image slider  -->
           <div class="row">
             <div class="col-sm-12 carouselImage">
+
+              <!-- ✅ CLOSE BUTTON -->
+              <button class="close-btn" (click)="goBack()" aria-label="Close">
+                <i class="fa fa-times"></i>
+              </button>
+
               <div [id]="'carouselExampleControls'" class="carousel slide" data-ride="carousel">
-
-                <!-- ✅ CLOSE BUTTON ADDED HERE -->
-                <button class="close-btn" (click)="goBack()" aria-label="Close">
-                  <i class="fa fa-times"></i>
-                </button>
-
                 <div class="carousel-inner">
                   <div *ngFor="let image of messInfo?.messImages; let first = first" class="carousel-item"
                     [class.active]="first">
