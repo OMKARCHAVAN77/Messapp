@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
+// ✅ Correct
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -120,6 +122,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
   ],
   imports: [
+    SocialLoginModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -178,6 +181,20 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [
+    {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '1025064756631-3lvel4896u8t8jgra4hum2c05d54f3mb.apps.googleusercontent.com'
+          )
+        }
+      ]
+    } as SocialAuthServiceConfig
+  },
       {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

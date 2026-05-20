@@ -79,9 +79,9 @@ export class LogInComponent {
   // ✅ Handle Google user — save to localStorage and navigate
   handleGoogleLogin(user: SocialUser): void {
     // Save Google user info to localStorage
-    localStorage.setItem('userId', user.id);
+   localStorage.setItem('userId', user.id ?? '');
     localStorage.setItem('role', 'Customer');
-    localStorage.setItem('token', user.idToken);
+    localStorage.setItem('token', user.idToken ?? '');
     localStorage.setItem('googleUser', JSON.stringify({
       name: user.name,
       email: user.email,
