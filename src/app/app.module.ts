@@ -152,11 +152,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
     CommonModule,
     ChartModule,
     CardModule,
@@ -171,9 +166,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [
-    // ✅ FIXED — correct provider for Google login
     {
-      provide: 'SocialAuthServiceConfig' as any,
+      provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
         providers: [
@@ -185,7 +179,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
           }
         ],
         onError: (err: any) => {
-          console.error('Google Auth Error:', err);
+          console.error(err);
         }
       } as SocialAuthServiceConfig
     },
