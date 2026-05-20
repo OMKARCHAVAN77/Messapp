@@ -8,7 +8,6 @@
   background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
 }
 
-/* ✅ FIXED — mat-card overflow and position */
 mat-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -31,7 +30,7 @@ mat-card {
   object-fit: cover;
 }
 
-/* ✅ CLOSE BUTTON */
+/* ✅ CLOSE BUTTON — Windows style */
 .close-btn {
   position: absolute;
   top: 15px;
@@ -39,19 +38,20 @@ mat-card {
   z-index: 9999;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  background: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 .close-btn:hover {
-  background: rgba(0, 0, 0, 0.85);
+  background: #E81123;
+  color: #fff;
 }
 
 .close-btn .fa-times {
