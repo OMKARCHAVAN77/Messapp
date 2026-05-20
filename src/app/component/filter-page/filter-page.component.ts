@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './filter-page.component.css'
 })
 export class FilterPageComponent {
- ratings = ['Any', '3.5', '4.0', '4.5', '5.0'];
+  ratings = ['Any', '3.5', '4.0', '4.5', '5.0'];
   foodTypes = ['Both', 'Veg', 'Non-veg'];
   selectedRating: string = 'Any';
   selectedFoodType: string = 'Both';
@@ -28,14 +28,19 @@ export class FilterPageComponent {
   applyFilters(): void {
     this.dialogRef.close({
       rating: this.selectedRating,
-      foodType: this.selectedFoodType === 'Both' ? 'all' : 
-               this.selectedFoodType === 'Veg' ? 'veg' : 'Non-veg'
+      // ✅ Exact values matching database: "Veg" and "Non-veg"
+      foodType: this.selectedFoodType === 'Both' ? 'all' :
+                this.selectedFoodType === 'Veg' ? 'Veg' : 'Non-veg'
     });
   }
 
   resetFilters(): void {
     this.selectedRating = 'Any';
     this.selectedFoodType = 'Both';
+    this.dialogRef.close({
+      rating: 'Any',
+      foodType: 'all'
+    });
   }
 
   closeDialog(): void {
