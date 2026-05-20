@@ -1,4 +1,3 @@
-/* Ensure full height layout */
 html,
 body {
   margin: 0;
@@ -7,7 +6,6 @@ body {
   overflow: hidden;
 }
 
-/* Full height container setup */
 .container-fluid,
 .row {
   height: 100vh;
@@ -19,14 +17,12 @@ mat-icon {
   color: #656565;
 }
 
-/* Ensure columns take full height and avoid scrollbars */
 .col-sm-6,
 .col-12 {
   height: 100%;
   overflow: hidden;
 }
 
-/* Left image section */
 .image-side {
   background-image: url('../../../assets/images/1001550601.jpg');
   background-size: cover;
@@ -37,15 +33,12 @@ mat-icon {
   padding: 20px;
 }
 
-/* Login container */
 .registerContainer {
   padding: 32px 50px 20px;
   background-color: #fff;
   box-sizing: border-box;
-
 }
 
-/* Angular Material form fields full width */
 mat-form-field {
   width: 100%;
   font-family: "Poppins", sans-serif;
@@ -78,7 +71,6 @@ mat-mdc-form-field-error {
   font-family: "Poppins", sans-serif;
 }
 
-/* Logo background (not used in current HTML, better to use <img>) */
 .logo-bg {
   background-image: url("../../../assets/images/logo.png");
   background-position: center;
@@ -86,7 +78,7 @@ mat-mdc-form-field-error {
   background-size: contain;
   width: 150px;
   height: 50px;
-  margin: 10px auto; /* Centers the div horizontally */
+  margin: 10px auto;
   display: block;
 }
 
@@ -97,7 +89,6 @@ mat-mdc-form-field-error {
   margin-bottom: 15px;
 }
 
-/* Forgot password link */
 .forgot-password {
   font-size: 14px;
   font-weight: 500;
@@ -107,9 +98,6 @@ mat-mdc-form-field-error {
   cursor: pointer;
 }
 
-
-
-/* Captcha display block */
 .captcha-code {
   background-color: #f1f1f1;
   padding: 0.5rem;
@@ -120,12 +108,10 @@ mat-mdc-form-field-error {
   border-radius: 4px 4px 0 0;
 }
 
-/* Full width utility */
 .full-width {
   width: 100%;
 }
 
-/* Login button styles */
 .loginbtn {
   background: #005DFF;
   color: white;
@@ -138,8 +124,7 @@ mat-mdc-form-field-error {
   width: 100%;
 }
 
-
-/* Google login block */
+/* ✅ Google button — clickable cursor */
 .googleLink {
   background-color: #fff;
   cursor: pointer;
@@ -149,16 +134,19 @@ mat-mdc-form-field-error {
   margin: 10px 0;
   display: flex;
   align-items: center;
-
   justify-content: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s;
+}
+
+.googleLink:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 .google-icon {
   width: 22px;
   height: 22px;
   margin-right: 10px;
-
 }
 
 .text {
@@ -169,12 +157,10 @@ mat-mdc-form-field-error {
   font-size: 15px;
 }
 
-/* Register anchor styling */
 .loginAchorTag a {
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
-
 }
 
 .loginAchorTag {
