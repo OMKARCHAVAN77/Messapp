@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-
-// ✅ Correct
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,7 +29,6 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -40,9 +36,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTabsModule } from '@angular/material/tabs'; 
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { OwnerdetailsComponent } from './component/ownerdetails/ownerdetails.component';
@@ -74,13 +70,10 @@ import { MessInfoComponent } from './component/customer/mess-info/mess-info.comp
 import { NgxUiLoaderConfig, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { AutoLoaderButtonDirective } from './auto-loader-button.directive';
 import { MessMainDetailsComponent } from './component/mess-main-details/mess-main-details.component';
-
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: 'three-strings',
@@ -93,7 +86,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   hasProgressBar: true,
   blur: 100
 };
-
 
 @NgModule({
   declarations: [
@@ -118,8 +110,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MessInfoComponent,
     AutoLoaderButtonDirective,
     MessMainDetailsComponent,
-
-
   ],
   imports: [
     SocialLoginModule,
@@ -159,14 +149,14 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    MatCheckboxModule,    
-    MatExpansionModule,  
-    MatFormFieldModule,   
-    MatInputModule,       
-    MatButtonModule ,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     CommonModule,
     ChartModule,
     CardModule,
@@ -181,21 +171,25 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [
+    // ✅ FIXED — correct provider for Google login
     {
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            '1025064756631-3lvel4896u8t8jgra4hum2c05d54f3mb.apps.googleusercontent.com'
-          )
+      provide: 'SocialAuthServiceConfig' as any,
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1025064756631-3lvel4896u8t8jgra4hum2c05d54f3mb.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err: any) => {
+          console.error('Google Auth Error:', err);
         }
-      ]
-    } as SocialAuthServiceConfig
-  },
-      {
+      } as SocialAuthServiceConfig
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
       multi: true
