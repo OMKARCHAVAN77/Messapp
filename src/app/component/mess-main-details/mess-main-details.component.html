@@ -2,16 +2,16 @@
   <div class="container mainShowContainer">
     <div class="row">
       <div class="col-sm-12">
-        <mat-card>
+        <mat-card style="position: relative;">
+
+          <!-- ✅ CLOSE BUTTON — first inside mat-card -->
+          <button class="close-btn" (click)="goBack()" aria-label="Close">
+            <i class="fa fa-times"></i>
+          </button>
+
           <!-- image slider  -->
           <div class="row">
             <div class="col-sm-12 carouselImage">
-
-              <!-- ✅ CLOSE BUTTON -->
-              <button class="close-btn" (click)="goBack()" aria-label="Close">
-                <i class="fa fa-times"></i>
-              </button>
-
               <div [id]="'carouselExampleControls'" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <div *ngFor="let image of messInfo?.messImages; let first = first" class="carousel-item"
@@ -70,7 +70,7 @@
 
             <!-- Status -->
             <div class="row align-items-center mb-2">
-              <div class="col-auto ">
+              <div class="col-auto">
                 <h6 class="status" [ngClass]="{
                   'text-success': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Open',
                   'text-warning': getMessStatus(getRelatedDetails(messInfo.userId)) === 'Opening Soon',
