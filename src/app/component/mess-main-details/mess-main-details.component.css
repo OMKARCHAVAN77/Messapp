@@ -8,16 +8,20 @@
   background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
 }
 
+/* ✅ FIXED — mat-card overflow and position */
 mat-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   background-color: #fff;
+  overflow: visible !important;
+  position: relative;
 }
 
 .carouselImage {
   padding: 10px 30px;
   position: relative;
+  overflow: visible;
 }
 
 .custom-carousel-img {
@@ -30,9 +34,9 @@ mat-card {
 /* ✅ CLOSE BUTTON */
 .close-btn {
   position: absolute;
-  top: 18px;
-  right: 38px;
-  z-index: 999;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
   width: 34px;
   height: 34px;
   border-radius: 50%;
