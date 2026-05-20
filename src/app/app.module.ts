@@ -174,7 +174,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '1025064756631-3lvel4896u8t8jgra4hum2c05d54f3mb.apps.googleusercontent.com'
+              '1025064756631-3lvel4896u8t8jgra4hum2c05d54f3mb.apps.googleusercontent.com',
+              { oneTapEnabled: false } // ✅ FIXES THE ERROR
             )
           }
         ],

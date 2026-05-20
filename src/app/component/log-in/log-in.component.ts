@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../Shared/Services/login.service';
 import { AgainLoginService } from '../../Shared/Services/again-login.service';
 import { ToastrService } from 'ngx-toastr';
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+// ✅ GoogleLoginProvider removed — not needed anymore
 
 @Component({
   selector: 'app-log-in',
@@ -29,17 +30,16 @@ export class LogInComponent {
     private router: Router,
     private http: HttpClient,
     private againLoginServ: AgainLoginService,
-    private socialAuthService: SocialAuthService  // ✅ added
+    private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
     this.initialLoginForm();
     this.generateCaptcha();
 
-    // ✅ Listen for Google login response
+    // ✅ asl-google-signin-button triggers this automatically — no manual call needed
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
       if (user) {
-        console.log('Google User:', user);
         this.handleGoogleLogin(user);
       }
     });
@@ -65,21 +65,10 @@ export class LogInComponent {
     this.captcha = Math.random().toString(36).substring(2, 8).toUpperCase();
   }
 
-  // ✅ Google Sign In
-  signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
-      console.log('Google login success:', user);
-      this.handleGoogleLogin(user);
-    }).catch((error) => {
-      console.error('Google login error:', error);
-      this.tostrServ.error('Google login failed. Please try again.');
-    });
-  }
+  // ✅ signInWithGoogle() DELETED — was causing the error
 
-  // ✅ Handle Google user — save to localStorage and navigate
   handleGoogleLogin(user: SocialUser): void {
-    // Save Google user info to localStorage
-   localStorage.setItem('userId', user.id ?? '');
+    localStorage.setItem('userId', user.id ?? '');
     localStorage.setItem('role', 'Customer');
     localStorage.setItem('token', user.idToken ?? '');
     localStorage.setItem('googleUser', JSON.stringify({
@@ -89,8 +78,6 @@ export class LogInComponent {
     }));
 
     this.tostrServ.success('Google Login Successful! Welcome ' + user.firstName);
-
-    // ✅ Navigate to customer page
     this.router.navigate(['mainCustomer']);
   }
 
@@ -126,13 +113,8 @@ export class LogInComponent {
               }
             },
             error: (_error: any) => {
-              if (_error.status === 400) {
-                this.router.navigate(['ownerdetails']);
-                this.tostrServ.info('Please complete your Mess details.');
-              } else {
-                this.router.navigate(['ownerdetails']);
-                this.tostrServ.info('Please complete your Mess details.');
-              }
+              this.router.navigate(['ownerdetails']);
+              this.tostrServ.info('Please complete your Mess details.');
             }
           });
         }

@@ -44,11 +44,16 @@
 
           <div class="divider-with-text my-2">or Login With</div>
 
-          <!-- ✅ Google Button -->
-          <div class="googleLink" (click)="signInWithGoogle()">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo"
-              class="google-icon">
-            <span class="text">Continue with Google</span>
+          <!-- ✅ No (click) handler — asl-google-signin-button is self-contained -->
+          <div class="googleLink">
+            <asl-google-signin-button
+              type="standard"
+              size="large"
+              text="signin_with"
+              shape="rectangular"
+              theme="outline"
+              width="300">
+            </asl-google-signin-button>
           </div>
 
           <!-- Register Link -->
