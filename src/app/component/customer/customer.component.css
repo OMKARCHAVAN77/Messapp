@@ -78,11 +78,11 @@ mat-card {
 }
 
 .food-icon.veg {
-  background-image: url('../../../assets/images/veg.png');
+  background-image: url('../../../../assets/images/veg.png');
 }
 
 .food-icon.veg-nonveg {
-  background-image: url('../../../assets/images/veg.png'), url('../../../assets/images/nonveg_icon.png');
+  background-image: url('../../../../assets/images/veg.png'), url('../../../../assets/images/nonveg_icon.png');
   background-position: left center, right center;
   background-size: 20px 20px, 20px 20px;
 }
