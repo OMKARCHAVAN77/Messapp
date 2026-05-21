@@ -6,18 +6,53 @@
 
 .background {
   background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
-
 }
 
-mat-card {
+/* ✅ FIX — Force override Angular Material mat-card styles */
+::ng-deep .mainShowContainer mat-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   background-color: #fff;
+  overflow: visible !important;
+  position: relative !important;
 }
 
+/* ✅ FIX — Force close button visible above everything */
+::ng-deep .mainShowContainer .close-btn {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 6px !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  transition: background 0.2s, color 0.2s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+::ng-deep .mainShowContainer .close-btn:hover {
+  background: #E81123 !important;
+  color: #fff !important;
+}
+
+::ng-deep .mainShowContainer .close-btn .fa-times {
+  font-size: 16px;
+}
+
+/* ✅ Keep carousel below close button */
 .carouselImage {
   padding: 10px 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .custom-carousel-img {
@@ -36,20 +71,16 @@ mat-card {
 .food-icon {
   display: inline-block;
   width: 40px;
-  /* adjust as needed */
   height: 25px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 
-/* Veg Icon */
 .food-icon.veg {
   background-image: url('../../../../assets/images/veg.png');
-
 }
 
-/* Veg & Non-Veg Icons side by side */
 .food-icon.veg-nonveg {
   background-image: url('../../../../assets/images/veg.png'), url('../../../../assets/images/nonveg_icon.png');
   background-position: left center, right center;
@@ -59,7 +90,7 @@ mat-card {
 .address {
   font-size: 18px;
   color: #333333;
-  font-weight: 300px;
+  font-weight: 300;
   font-family: "Poppins", sans-serif;
 }
 
@@ -68,13 +99,10 @@ h2 {
   font-family: "Poppins", sans-serif;
 }
 
-
-
 .custom-bookmark {
   font-size: 40px;
   color: #FFC300;
   margin: 10px 0 0 55px;
-
 }
 
 .rating-section-custom {
@@ -83,7 +111,6 @@ h2 {
 
 .rating-badge {
   background-color: #ffc107;
-  /* Bootstrap warning color */
   color: #ffffff;
   padding: 2px 6px;
   border-radius: 4px;
@@ -106,21 +133,10 @@ h2 {
   margin-top: 2px;
 }
 
-.text-success {
-  color: green !important;
-}
-
-.text-warning {
-  color: orange !important;
-}
-
-.text-danger {
-  color: red !important;
-}
-
-.text-orange {
-  color: #FF8800 !important;
-}
+.text-success { color: green !important; }
+.text-warning { color: orange !important; }
+.text-danger  { color: red !important; }
+.text-orange  { color: #FF8800 !important; }
 
 .broder {
   border-bottom: 1px dotted #000;
@@ -150,31 +166,22 @@ h2 {
   font-family: 'Poppins', sans-serif;
 }
 
-
-.gap-2>* {
+.gap-2 > * {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 }
-
 
 .custom-feedback-btn .p-button .fa {
   margin-right: 8px;
   font-size: 16px;
 }
 
-
-/* Feedback Button Style */
 .custom-feedback-btn ::ng-deep .p-button {
   background: #8ef58d;
   border: none;
   color: #097B09;
-  font-weight: 400;
+  font-weight: 500;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
-  font-weight: 500;
-  border: none;
   border-radius: 8px;
 }
-
-
-
