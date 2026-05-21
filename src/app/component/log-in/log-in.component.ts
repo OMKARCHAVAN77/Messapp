@@ -17,6 +17,7 @@ export class LogInComponent {
   hidePassword: boolean = true;
   myLoginForm!: FormGroup;
   captcha: string = '';
+  private googleLoginTriggered: boolean = false;  // ✅ flag added
 
   @ViewChild('email', { read: MatInput }) emailMatInput!: MatInput;
   @ViewChild('email') emailElementRef!: ElementRef;
@@ -32,18 +33,19 @@ export class LogInComponent {
     private router: Router,
     private http: HttpClient,
     private againLoginServ: AgainLoginService,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService  // ✅ added
   ) { }
 
   ngOnInit(): void {
     this.initialLoginForm();
     this.generateCaptcha();
 
-    // ✅ Listen for Google login
+    // ✅ Listen for Google login — only when user clicked button
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      if (user) {
+      if (user && this.googleLoginTriggered) {
         console.log('Google User:', user);
         this.handleGoogleLogin(user);
+        this.googleLoginTriggered = false;
       }
     });
   }
@@ -86,8 +88,34 @@ export class LogInComponent {
           email: user.email,
           photo: resp.photo
         }));
+
         this.tostrServ.success('Google Login Successful! Welcome ' + user.firstName);
-        this.router.navigate(['mainCustomer']);
+
+        // ✅ Navigate based on role
+        if (resp.role === 'Admin') {
+          this.router.navigate(['layout/dashbord']);
+          return;
+        }
+
+        if (resp.role === 'Customer') {
+          this.router.navigate(['mainCustomer']);
+          return;
+        }
+
+        if (resp.role === 'Mess Owner') {
+          this.againLoginServ.getMessLoginDetails().subscribe({
+            next: (_apiResp: any) => {
+              if (_apiResp.success === true) {
+                this.router.navigate(['layout/dashbord']);
+                this.tostrServ.success('Welcome Back!');
+              }
+            },
+            error: (_error: any) => {
+              this.router.navigate(['ownerdetails']);
+              this.tostrServ.info('Please complete your Mess details.');
+            }
+          });
+        }
       },
       error: (err) => {
         console.error('Backend Google login error:', err);
@@ -109,16 +137,19 @@ export class LogInComponent {
         localStorage.setItem('role', _resp.role);
         localStorage.setItem('token', _resp.data);
         this.myLoginForm.reset();
+
         if (_resp.role === 'Admin') {
           this.router.navigate(['layout/dashbord']);
           this.tostrServ.success('Admin Login Successful...');
           return;
         }
+
         if (_resp.role === 'Customer') {
           this.router.navigate(['customer']);
           this.tostrServ.success('Customer Login Successful...');
           return;
         }
+
         if (_resp.role === 'Mess Owner') {
           this.againLoginServ.getMessLoginDetails().subscribe({
             next: (_apiResp: any) => {
