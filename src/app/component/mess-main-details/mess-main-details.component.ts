@@ -6,10 +6,10 @@ import { switchMap } from 'rxjs';
 import { CustomerService } from '../../Shared/Services/customer.service';
 import { FeedBackPageComponent } from '../customer/feed-back-page/feed-back-page.component';
 
-
 interface Mess {
   userId: string;
 }
+
 @Component({
   selector: 'app-mess-main-details',
   templateUrl: './mess-main-details.component.html',
@@ -19,8 +19,13 @@ export class MessMainDetailsComponent {
   [x: string]: any;
   userId: string = '';
   isOpen: boolean = false;
-  myNewMessDetailsInformationObj: { messDetails: any[]; timeDetails: any[], rating: any[], menuDetails: any[] } = { messDetails: [], timeDetails: [], rating: [], menuDetails: [] };
-  messStatusText: string = ''
+  myNewMessDetailsInformationObj: { messDetails: any[]; timeDetails: any[], rating: any[], menuDetails: any[] } = {
+    messDetails: [],
+    timeDetails: [],
+    rating: [],
+    menuDetails: []
+  };
+  messStatusText: string = '';
   messInfo: any;
   myMessName: string = '';
   star: string = '0';
@@ -28,24 +33,25 @@ export class MessMainDetailsComponent {
   myRatingData: any[] = [];
   timeInfo: any;
   paginatedMessDetails: Mess[] = [];
+  visible: boolean = false;
+  feedbackText: string = 'F';
+  buttonWidth: string = '40px';
 
-  // ADD Location in constructor
   constructor(
     private customerServ: CustomerService,
     private activeRoute: ActivatedRoute,
     public dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private router: Router,
-    private location: Location   // <-- ADDED
+    private location: Location
   ) { }
 
-  // ADD this method
+  // ✅ Go back to previous page — works both before and after login
   goBack(): void {
     this.location.back();
   }
 
   ngOnInit(): void {
-
     this.activeRoute.params.pipe(
       switchMap((params: any) => {
         this.userId = params['id'];
@@ -59,7 +65,9 @@ export class MessMainDetailsComponent {
       if (data?.messDetails) {
         this.messInfo = data.messDetails.find((mess: any) => mess.userId === this.userId);
         console.log('Filtered Mess Info:', this.messInfo);
-        this.myMessName = this.messInfo.messName;
+        if (this.messInfo) {
+          this.myMessName = this.messInfo.messName;
+        }
       }
 
       if (data?.rating) {
@@ -70,8 +78,7 @@ export class MessMainDetailsComponent {
         this.totalRatings = ratings.length;
         if (this.totalRatings > 0) {
           const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
-          const averageRating = totalRating / this.totalRatings;
-          this.star = averageRating.toFixed(1);
+          this.star = (totalRating / this.totalRatings).toFixed(1);
         }
       }
 
@@ -80,6 +87,8 @@ export class MessMainDetailsComponent {
         this.timeInfo = data.timeDetails.find((time: any) => time.userId === this.userId);
       }
     });
+
+    // ✅ Call refreshRatingData separately — no redirect on failure
     this.refreshRatingData();
   }
 
@@ -87,31 +96,26 @@ export class MessMainDetailsComponent {
     if (!time || typeof time !== 'string' || !time.includes(':')) {
       return '-';
     }
-
     const [hoursStr, minutesStr] = time.split(':');
     const hours = Number(hoursStr);
     const minutes = Number(minutesStr);
-
     if (isNaN(hours) || isNaN(minutes)) {
       return '-';
     }
-
     const period = hours >= 12 ? 'PM' : 'AM';
     const hours12 = hours % 12 || 12;
     const paddedMinutes = minutes.toString().padStart(2, '0');
-
     return `${hours12}:${paddedMinutes} ${period}`;
   }
 
-  feedbackText: string = 'F';
-  buttonWidth: string = '40px';
-
   getRelatedDetails(userId: any): any {
-    return this.myNewMessDetailsInformationObj.timeDetails.find(detail => detail.userId === userId) || null;
+    return this.myNewMessDetailsInformationObj.timeDetails.find(
+      detail => detail.userId === userId
+    ) || null;
   }
 
   openMyFeedBackBox() {
-    alert("please login or singup")
+    alert('please login or signup');
   }
 
   getMessStatus(timeInfo: any): string {
@@ -123,17 +127,12 @@ export class MessMainDetailsComponent {
     if (timeInfo?.morning?.from && timeInfo?.morning?.to) {
       const [morningFromHours, morningFromMinutes] = timeInfo.morning.from.split(':').map(Number);
       const [morningToHours, morningToMinutes] = timeInfo.morning.to.split(':').map(Number);
-
       const morningOpen = morningFromHours * 60 + morningFromMinutes;
       const morningClose = morningToHours * 60 + morningToMinutes;
 
       if (currentTimeInMinutes >= morningOpen && currentTimeInMinutes <= morningClose) {
-        if (currentTimeInMinutes >= (morningClose - 30)) {
-          return 'Closing Soon';
-        }
-        return 'Open';
+        return currentTimeInMinutes >= (morningClose - 30) ? 'Closing Soon' : 'Open';
       }
-
       if (currentTimeInMinutes >= (morningOpen - 30) && currentTimeInMinutes < morningOpen) {
         return 'Opening Soon';
       }
@@ -142,17 +141,12 @@ export class MessMainDetailsComponent {
     if (timeInfo?.evening?.from && timeInfo?.evening?.to) {
       const [eveningFromHours, eveningFromMinutes] = timeInfo.evening.from.split(':').map(Number);
       const [eveningToHours, eveningToMinutes] = timeInfo.evening.to.split(':').map(Number);
-
       const eveningOpen = eveningFromHours * 60 + eveningFromMinutes;
       const eveningClose = eveningToHours * 60 + eveningToMinutes;
 
       if (currentTimeInMinutes >= eveningOpen && currentTimeInMinutes <= eveningClose) {
-        if (currentTimeInMinutes >= (eveningClose - 30)) {
-          return 'Closing Soon';
-        }
-        return 'Open';
+        return currentTimeInMinutes >= (eveningClose - 30) ? 'Closing Soon' : 'Open';
       }
-
       if (currentTimeInMinutes >= (eveningOpen - 30) && currentTimeInMinutes < eveningOpen) {
         return 'Opening Soon';
       }
@@ -161,14 +155,16 @@ export class MessMainDetailsComponent {
     return 'Closed';
   }
 
+  // ✅ FIXED — no more redirect to login on missing rating
   refreshRatingData() {
     this.customerServ.getCustomerInMessDetails().subscribe(
       (data: any) => {
         console.log('Full response data:', data);
 
-        if (data?.message === 'Please login' || !data.rating) {
-          console.warn('User not logged in or no rating data.');
-          this['router'].navigate(['/login']);
+        if (!data?.rating) {
+          console.warn('No rating data available.');
+          this.star = '0';
+          this.totalRatings = 0;
           return;
         }
 
@@ -184,14 +180,16 @@ export class MessMainDetailsComponent {
 
         if (this.totalRatings > 0) {
           const totalRating = ratings.reduce((sum, rating) => sum + rating, 0);
-          const averageRating = totalRating / this.totalRatings;
-          this.star = averageRating.toFixed(1);
+          this.star = (totalRating / this.totalRatings).toFixed(1);
         } else {
           this.star = '0';
         }
       },
       (error) => {
         console.error('Error fetching rating data:', error);
+        // ✅ Set defaults on error — don't crash or redirect
+        this.star = '0';
+        this.totalRatings = 0;
       }
     );
   }
@@ -206,8 +204,6 @@ export class MessMainDetailsComponent {
     this.buttonWidth = '40px';
   }
 
-  visible: boolean = false;
-
   showDialog() {
     this.visible = true;
   }
@@ -215,8 +211,8 @@ export class MessMainDetailsComponent {
   onLoginButton() {
     this.router.navigate(['login']);
   }
+
   onRegisternButton() {
     this.router.navigate(['signup']);
   }
-
 }
