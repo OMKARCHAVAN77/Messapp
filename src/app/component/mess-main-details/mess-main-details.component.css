@@ -17,10 +17,12 @@ mat-card {
   position: relative;
 }
 
+/* ✅ FIX: Carousel stays below the close button */
 .carouselImage {
   padding: 10px 30px;
   position: relative;
   overflow: visible;
+  z-index: 1;
 }
 
 .custom-carousel-img {
@@ -30,16 +32,16 @@ mat-card {
   object-fit: cover;
 }
 
-/* ✅ CLOSE BUTTON — Windows style */
+/* ✅ FIXED CLOSE BUTTON — Now fully visible over carousel */
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 9999;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;                        /* ✅ High z-index to float above carousel */
   width: 34px;
   height: 34px;
-  border-radius: 4px;
-  background: transparent;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.45);      /* ✅ Visible dark background on image */
   border: none;
   cursor: pointer;
   display: flex;
@@ -47,6 +49,8 @@ mat-card {
   justify-content: center;
   color: #fff;
   transition: background 0.2s, color 0.2s;
+  backdrop-filter: blur(4px);           /* ✅ Glassmorphism effect */
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .close-btn:hover {
@@ -86,7 +90,7 @@ mat-card {
 .address {
   font-size: 18px;
   color: #333333;
-  font-weight: 300px;
+  font-weight: 300;
   font-family: "Poppins", sans-serif;
 }
 
@@ -173,7 +177,7 @@ h2 {
   font-family: 'Poppins', sans-serif;
 }
 
-.gap-2>* {
+.gap-2 > * {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 }
