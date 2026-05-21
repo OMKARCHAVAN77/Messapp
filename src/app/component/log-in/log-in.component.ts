@@ -7,7 +7,6 @@ import { LoginService } from '../../Shared/Services/login.service';
 import { AgainLoginService } from '../../Shared/Services/again-login.service';
 import { ToastrService } from 'ngx-toastr';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-// ✅ GoogleLoginProvider removed — not needed anymore
 
 @Component({
   selector: 'app-log-in',
@@ -23,6 +22,9 @@ export class LogInComponent {
   @ViewChild('email') emailElementRef!: ElementRef;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
 
+  // ✅ Backend URL
+  private backendUrl = 'https://findfoodbackend.vercel.app';
+
   constructor(
     private fb: FormBuilder,
     private tostrServ: ToastrService,
@@ -37,9 +39,10 @@ export class LogInComponent {
     this.initialLoginForm();
     this.generateCaptcha();
 
-    // ✅ asl-google-signin-button triggers this automatically — no manual call needed
+    // ✅ Listen for Google login
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
       if (user) {
+        console.log('Google User:', user);
         this.handleGoogleLogin(user);
       }
     });
@@ -65,20 +68,32 @@ export class LogInComponent {
     this.captcha = Math.random().toString(36).substring(2, 8).toUpperCase();
   }
 
-  // ✅ signInWithGoogle() DELETED — was causing the error
-
+  // ✅ Send Google data to backend and save in MongoDB
   handleGoogleLogin(user: SocialUser): void {
-    localStorage.setItem('userId', user.id ?? '');
-    localStorage.setItem('role', 'Customer');
-    localStorage.setItem('token', user.idToken ?? '');
-    localStorage.setItem('googleUser', JSON.stringify({
+    this.http.post(`${this.backendUrl}/api/google-login`, {
       name: user.name,
       email: user.email,
-      photo: user.photoUrl
-    }));
-
-    this.tostrServ.success('Google Login Successful! Welcome ' + user.firstName);
-    this.router.navigate(['mainCustomer']);
+      photo: user.photoUrl,
+      googleId: user.id
+    }).subscribe({
+      next: (resp: any) => {
+        console.log('Backend Google login response:', resp);
+        localStorage.setItem('userId', resp.userId);
+        localStorage.setItem('role', resp.role);
+        localStorage.setItem('token', resp.data);
+        localStorage.setItem('googleUser', JSON.stringify({
+          name: resp.name,
+          email: user.email,
+          photo: resp.photo
+        }));
+        this.tostrServ.success('Google Login Successful! Welcome ' + user.firstName);
+        this.router.navigate(['mainCustomer']);
+      },
+      error: (err) => {
+        console.error('Backend Google login error:', err);
+        this.tostrServ.error('Google login failed!');
+      }
+    });
   }
 
   onSubmit() {
@@ -113,8 +128,13 @@ export class LogInComponent {
               }
             },
             error: (_error: any) => {
-              this.router.navigate(['ownerdetails']);
-              this.tostrServ.info('Please complete your Mess details.');
+              if (_error.status === 400) {
+                this.router.navigate(['ownerdetails']);
+                this.tostrServ.info('Please complete your Mess details.');
+              } else {
+                this.router.navigate(['ownerdetails']);
+                this.tostrServ.info('Please complete your Mess details.');
+              }
             }
           });
         }
