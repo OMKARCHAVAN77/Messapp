@@ -8,6 +8,7 @@
   background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
 }
 
+/* ✅ FIX 1 — position:relative + overflow:visible so close button is not clipped */
 mat-card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -15,6 +16,20 @@ mat-card {
   background-color: #fff;
   overflow: visible !important;
   position: relative;
+}
+
+/* ✅ FIX 2 — carousel stays below close button */
+.carouselImage {
+  padding: 10px 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-carousel-img {
+  border-radius: 8px;
+  height: 315px;
+  width: 100%;
+  object-fit: cover;
 }
 
 /* ✅ CLOSE BUTTON */
@@ -45,20 +60,6 @@ mat-card {
 
 .close-btn .fa-times {
   font-size: 16px;
-}
-
-/* ✅ Keep carousel below close button */
-.carouselImage {
-  padding: 10px 30px;
-  position: relative;
-  z-index: 1;
-}
-
-.custom-carousel-img {
-  border-radius: 8px;
-  height: 315px;
-  width: 100%;
-  object-fit: cover;
 }
 
 .messname {
