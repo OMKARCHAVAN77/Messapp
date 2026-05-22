@@ -216,6 +216,7 @@ mat-toolbar {
 }
 
 .food-icon.veg {
+  /* background-color: red; */
   background-image: url('../../../assets/images/veg.png');
 }
 

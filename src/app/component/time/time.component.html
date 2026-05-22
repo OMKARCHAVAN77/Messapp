@@ -20,15 +20,13 @@
             <div class="col-sm-6">
               <mat-form-field appearance="outline">
                 <mat-label>Open</mat-label>
-                <input matInput type="time" formControlName="from">
-
+                <input matInput type="time" formControlName="from" lang="en-US">
               </mat-form-field>
             </div>
             <div class="col-sm-6">
               <mat-form-field appearance="outline">
                 <mat-label>Close</mat-label>
-                <input matInput type="time" formControlName="to">
-
+                <input matInput type="time" formControlName="to" lang="en-US">
               </mat-form-field>
             </div>
           </div>
@@ -43,15 +41,13 @@
             <div class="col-sm-6">
               <mat-form-field appearance="outline">
                 <mat-label>Open</mat-label>
-                <input matInput type="time" formControlName="from">
-
+                <input matInput type="time" formControlName="from" lang="en-US">
               </mat-form-field>
             </div>
             <div class="col-sm-6">
               <mat-form-field appearance="outline">
                 <mat-label>Close</mat-label>
-                <input matInput type="time" formControlName="to">
-
+                <input matInput type="time" formControlName="to" lang="en-US">
               </mat-form-field>
             </div>
           </div>
@@ -73,23 +69,23 @@
               </mat-form-field>
             </div>
             <div class="col-sm-12">
-                <div class=" ml-1 d-flex flex-wrap align-items-center gap-3">
-              <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="period" value="full day" formControlName="period"
-                  class="custom-control-input">
-                <label class="custom-control-label" for="customRadio1">Full day</label>
+              <div class="ml-1 d-flex flex-wrap align-items-center gap-3">
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="customRadio1" name="period" value="full day"
+                    formControlName="period" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio1">Full day</label>
+                </div>
+                <div class="custom-control custom-radio my-2">
+                  <input type="radio" id="customRadio2" name="period" value="morning"
+                    formControlName="period" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio2">Only morning</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="customRadio3" name="period" value="evening"
+                    formControlName="period" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio3">Only Evening</label>
+                </div>
               </div>
-              <div class="custom-control custom-radio my-2">
-                <input type="radio" id="customRadio2" name="period" value="morning" formControlName="period"
-                  class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Only morning</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="period" value="evening" formControlName="period"
-                  class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">Only Evening</label>
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -98,6 +94,5 @@
         <button type="submit" class="form-btn" (click)="onTimeDataSubmit()" color="primary">Save</button>
       </div>
     </form>
-
   </div>
 </div>
