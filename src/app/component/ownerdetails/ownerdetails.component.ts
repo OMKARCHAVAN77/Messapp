@@ -80,7 +80,7 @@ export class OwnerdetailsComponent implements OnInit {
             '',
             [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
           ],
-          email: ['', Validators.email],           // ✅ not mandatory, format validation kept
+          email: ['', Validators.email],           // ✅ not mandatory, format kept
         }),
         license: this.fb.group({
           licenseNumber: [''],                     // ✅ not mandatory
@@ -267,16 +267,16 @@ export class OwnerdetailsComponent implements OnInit {
 
   myNewArr: any = [];
 
+  // ✅ Unchecked items stay in UI, only removed from form array
   toggleFoodSelection(day: string, time: 'morning' | 'evening', foodItem: string, isChecked: boolean) {
     const menuArray = this.getMenuFormArray(day, time);
     const targetMenu = this.menuList.find((menu) => menu.day === day);
     if (targetMenu) {
-      const menuItems = time === 'morning' ? targetMenu.morningMenu : targetMenu.eveningMenu;
       if (isChecked) {
+        // ✅ Add to form array if not already present
         if (!menuArray.value.includes(foodItem)) { menuArray.push(this.fb.control(foodItem)); }
       } else {
-        const menuIndex = menuItems.indexOf(foodItem);
-        if (menuIndex > -1) { menuItems.splice(menuIndex, 1); }
+        // ✅ Only remove from form array (keeps showing in UI)
         const formIndex = menuArray.controls.findIndex((control) => control.value === foodItem);
         if (formIndex > -1) { menuArray.removeAt(formIndex); }
       }

@@ -3,6 +3,7 @@
         <div class="stepper-wrapper">
             <mat-stepper orientation="horizontal" class="p-2" #stepper>
                 <form [formGroup]="myMessForm">
+
                     <!-- Step 1: Mess Details -->
                     <mat-step>
                         <ng-template matStepLabel>
@@ -223,7 +224,10 @@
                                                                 <div class="row my-2">
                                                                     <div class="col-sm-6">
                                                                         <div class="input-group">
-                                                                            <input matInput type="text" class="form-control" placeholder="Enter Your Food" #morningInput #messName>
+                                                                            <!-- ✅ Enter key added -->
+                                                                            <input matInput type="text" class="form-control"
+                                                                                placeholder="Enter Your Food" #morningInput #messName
+                                                                                (keydown.enter)="showToFoodItem(item.day, 'morning', morningInput); $event.preventDefault()">
                                                                             <div class="input-group-append">
                                                                                 <button class="btn addbtn btn-primary" type="button"
                                                                                     (click)="showToFoodItem(item.day, 'morning', morningInput)">Add</button>
@@ -260,7 +264,10 @@
                                                                 <div class="row my-2">
                                                                     <div class="col-sm-6">
                                                                         <div class="input-group">
-                                                                            <input matInput type="text" class="form-control" placeholder="Enter Your Food" #eveningInput>
+                                                                            <!-- ✅ Enter key added -->
+                                                                            <input matInput type="text" class="form-control"
+                                                                                placeholder="Enter Your Food" #eveningInput
+                                                                                (keydown.enter)="showToFoodItem(item.day, 'evening', eveningInput); $event.preventDefault()">
                                                                             <div class="input-group-append">
                                                                                 <button class="btn addbtn btn-primary" type="button"
                                                                                     (click)="showToFoodItem(item.day, 'evening', eveningInput)">Add</button>
