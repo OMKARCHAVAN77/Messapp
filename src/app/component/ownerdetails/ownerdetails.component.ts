@@ -218,14 +218,15 @@ export class OwnerdetailsComponent implements OnInit {
     return this.myMessForm.get('messDetails.messImages') as FormArray;
   }
 
+  // ✅ First letter uppercase for default menu items
   menuList = [
-    { day: 'Monday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Tuesday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Wednesday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Thursday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Friday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Saturday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
-    { day: 'Sunday', morningMenu: ['chapati', 'rice', 'daal', 'papad'], eveningMenu: ['chapati', 'rice', 'daal', 'papad'], expanded: true },
+    { day: 'Monday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Tuesday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Wednesday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Thursday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Friday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Saturday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
+    { day: 'Sunday', morningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], eveningMenu: ['Chapati', 'Rice', 'Daal', 'Papad'], expanded: true },
   ];
 
   day: any;
@@ -247,9 +248,12 @@ export class OwnerdetailsComponent implements OnInit {
     return this.myMessForm.get(`menuDetails.${time}.${day}`) as FormArray;
   }
 
+  // ✅ First letter uppercase, rest lowercase for newly added items
   showToFoodItem(day: string, time: 'morning' | 'evening', inputElement: HTMLInputElement) {
-    const foodVal = inputElement.value.trim();
-    if (!foodVal) return;
+    const rawVal = inputElement.value.trim();
+    if (!rawVal) return;
+    // ✅ First letter uppercase, rest lowercase
+    const foodVal = rawVal.charAt(0).toUpperCase() + rawVal.slice(1).toLowerCase();
     const menuArray = this.getMenuFormArray(day, time);
     const targetMenu = this.menuList.find((menu) => menu.day === day);
     if (targetMenu) {
