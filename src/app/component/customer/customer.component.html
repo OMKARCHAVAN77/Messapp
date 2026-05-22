@@ -74,7 +74,7 @@
               (click)="navigateToShowMessInfo(mess.userId)">
               <h5 class="mb-0 zomato-title">{{ mess.messName }}</h5>
               <span *ngIf="mess?.foodType === 'Veg'" class="food-icon veg"></span>
-              <span *ngIf="mess?.foodType === 'Non-veg" class="food-icon veg-nonveg"></span>
+              <span *ngIf="mess?.foodType === 'Non-veg'" class="food-icon veg-nonveg"></span>
             </div>
 
             <p class="text-muted mb-2" (click)="navigateToShowMessInfo(mess.userId)">
