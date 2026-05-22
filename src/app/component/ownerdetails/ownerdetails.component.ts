@@ -66,25 +66,25 @@ export class OwnerdetailsComponent implements OnInit {
         userId: localStorage.getItem('userId'),
         messName: ['', Validators.required],
         address: this.fb.group({
-          shopNumber: ['', Validators.required],
+          shopNumber: [''],                        // ✅ not mandatory
           area: ['', Validators.required],
           city: ['', Validators.required],
           pincode: [
             '',
             [Validators.required, Validators.pattern(/^[0-9]{6}$/)],
           ],
-          landmark: ['', Validators.required],
+          landmark: [''],                          // ✅ not mandatory
         }),
         contact: this.fb.group({
           mobileNumber: [
             '',
             [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
           ],
-          email: ['', [Validators.required, Validators.email]],
+          email: ['', Validators.email],           // ✅ not mandatory, format validation kept
         }),
         license: this.fb.group({
-          licenseNumber: ['', Validators.required],
-          licenseImage: this.fb.control('', Validators.required),
+          licenseNumber: [''],                     // ✅ not mandatory
+          licenseImage: this.fb.control(''),       // ✅ not mandatory
         }),
         foodType: ['Veg', Validators.required],
         messImages: this.fb.array([]),
@@ -115,7 +115,6 @@ export class OwnerdetailsComponent implements OnInit {
         monthlyCharges: ['', [Validators.required, Validators.min(1)]],
         singleDayCharges: ['', [Validators.required, Validators.min(1)]],
         specialDayVegCharges: ['', [Validators.required, Validators.min(1)]],
-        // ✅ NO required validator here — handled dynamically
         specialDaynonVegCharges: [''],
       }),
       timeDetails: this.fb.group({
@@ -140,10 +139,8 @@ export class OwnerdetailsComponent implements OnInit {
   onFoodTypeChange(value: string) {
     const nonVegControl = this.myMessForm.get('priceDetails.specialDaynonVegCharges');
     if (value === 'Non-veg') {
-      // Add required validator when non-veg selected
       nonVegControl?.setValidators([Validators.required, Validators.min(1)]);
     } else {
-      // Remove validators and reset value when veg selected
       nonVegControl?.clearValidators();
       nonVegControl?.setValue('');
     }
