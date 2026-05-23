@@ -2,14 +2,13 @@
   <h4>Time</h4>
   <button class="logout-btn" (click)="onLogoutButton()">Log Out</button>
 </div>
+
 <div class="">
   <div class="card p-4 fade-in-up">
     <form [formGroup]="myTimeForm" (submit)="onTimeDataSubmit()">
       <div formGroupName="timeDetails">
-        <div class="row">
-          <div class="col-sm-12">
-          </div>
-        </div>
+
+        <!-- Morning Time -->
         <div formGroupName="morning">
           <div class="row my-1">
             <div class="col-sm-12">
@@ -31,6 +30,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Evening Time -->
         <div formGroupName="evening">
           <div class="row my-1">
             <div class="col-sm-12">
@@ -53,22 +54,36 @@
           </div>
         </div>
 
+        <!-- Holiday -->
         <div formGroupName="holiday">
           <div class="row">
             <div class="col-sm-12">
               <h5 class="form-header">Holiday</h5>
             </div>
+
+            <!-- Select Holidays Input -->
             <div class="col-sm-6">
-              <mat-form-field appearance="outline">
-                <mat-label>Select an option</mat-label>
-                <mat-select formControlName="day">
-                  <mat-option [value]="menu.day" *ngFor="let menu of menuList">
-                    {{menu.day}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              <div class="select-holiday-input" (click)="openHolidayModal()">
+                <span [class.has-value]="selectedHolidays.length > 0">
+                  {{ selectedHolidays.length > 0 ? selectedHolidays.length + ' holiday' + (selectedHolidays.length > 1 ? 's' : '') + ' selected' : 'Select Holidays' }}
+                </span>
+                <mat-icon>expand_more</mat-icon>
+              </div>
             </div>
-            <div class="col-sm-12">
+
+            <!-- Selected Holiday Chips -->
+            <div class="col-sm-12" *ngIf="selectedHolidays.length > 0">
+              <div class="holiday-chips">
+                <div class="holiday-chip" *ngFor="let item of selectedHolidays">
+                  <span class="chip-name">{{ item.name }}</span>
+                  <span class="chip-dates">{{ item.from | date:'d MMM' }} – {{ item.to | date:'d MMM' }}</span>
+                  <span class="chip-close" (click)="removeHoliday(item.name)">×</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="col-sm-12 mt-2">
               <div class="ml-1 d-flex flex-wrap align-items-center gap-3">
                 <div class="custom-control custom-radio">
                   <input type="radio" id="customRadio1" name="period" value="full day"
@@ -89,10 +104,58 @@
             </div>
           </div>
         </div>
+
       </div>
+
+      <!-- Save Button -->
       <div class="button d-flex justify-content-end">
         <button type="submit" class="form-btn" (click)="onTimeDataSubmit()" color="primary">Save</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- Holiday Modal -->
+<div class="holiday-modal-overlay" *ngIf="isHolidayModalOpen" (click)="onOverlayClick($event)">
+  <div class="holiday-modal" #holidayModal>
+    <h6 class="modal-title-text">Select Holiday</h6>
+    <p class="modal-sub-text">Choose a holiday and set its date range</p>
+
+    <!-- Holiday List -->
+    <div class="holiday-list">
+      <div
+        class="holiday-option"
+        *ngFor="let h of holidayList"
+        [class.checked-row]="pendingHoliday === h"
+        (click)="selectPendingHoliday(h)">
+        <input
+          type="checkbox"
+          [checked]="pendingHoliday === h"
+          (change)="selectPendingHoliday(h)"
+          (click)="$event.stopPropagation()">
+        {{ h }}
+      </div>
+    </div>
+
+    <!-- Date Range -->
+    <div class="date-range-row">
+      <div class="date-col">
+        <label>FROM DATE</label>
+        <input type="date" [(ngModel)]="holidayFromDate" [ngModelOptions]="{standalone: true}"
+          [class.error]="dateError && !holidayFromDate">
+      </div>
+      <div class="date-col">
+        <label>TO DATE</label>
+        <input type="date" [(ngModel)]="holidayToDate" [ngModelOptions]="{standalone: true}"
+          [class.error]="dateError && !holidayToDate">
+      </div>
+    </div>
+    <p class="date-error-msg" *ngIf="dateError">Please select a holiday and both dates.</p>
+
+    <!-- Actions -->
+    <div class="modal-action-row">
+      <button type="button" class="btn-cancel" (click)="closeHolidayModal()">Cancel</button>
+      <button type="button" class="btn-add" (click)="confirmHoliday()">Add</button>
+    </div>
   </div>
 </div>
