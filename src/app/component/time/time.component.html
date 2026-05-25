@@ -17,46 +17,62 @@
           </div>
           <div class="form-row">
             <div class="col-sm-6">
-              <mat-form-field appearance="outline">
-                <mat-label>Open</mat-label>
-                <input matInput type="time" formControlName="from" lang="en-US">
-              </mat-form-field>
+              <label class="drum-field-label">Open</label>
+              <div class="drum-wrap">
+                <div class="sel-line"></div>
+                <div class="drum" id="mf-h" data-type="hour"></div>
+                <div class="drum-sep">:</div>
+                <div class="drum" id="mf-m" data-type="minute"></div>
+                <div class="drum drum-ampm" id="mf-a" data-type="ampm"></div>
+              </div>
             </div>
             <div class="col-sm-6">
-              <mat-form-field appearance="outline">
-                <mat-label>Close</mat-label>
-                <input matInput type="time" formControlName="to" lang="en-US">
-              </mat-form-field>
+              <label class="drum-field-label">Close</label>
+              <div class="drum-wrap">
+                <div class="sel-line"></div>
+                <div class="drum" id="mt-h" data-type="hour"></div>
+                <div class="drum-sep">:</div>
+                <div class="drum" id="mt-m" data-type="minute"></div>
+                <div class="drum drum-ampm" id="mt-a" data-type="ampm"></div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Evening Time -->
         <div formGroupName="evening">
-          <div class="row my-1">
+          <div class="row my-1 mt-3">
             <div class="col-sm-12">
               <h5 class="form-header">Evening Time</h5>
             </div>
           </div>
           <div class="form-row">
             <div class="col-sm-6">
-              <mat-form-field appearance="outline">
-                <mat-label>Open</mat-label>
-                <input matInput type="time" formControlName="from" lang="en-US">
-              </mat-form-field>
+              <label class="drum-field-label">Open</label>
+              <div class="drum-wrap">
+                <div class="sel-line"></div>
+                <div class="drum" id="ef-h" data-type="hour"></div>
+                <div class="drum-sep">:</div>
+                <div class="drum" id="ef-m" data-type="minute"></div>
+                <div class="drum drum-ampm" id="ef-a" data-type="ampm"></div>
+              </div>
             </div>
             <div class="col-sm-6">
-              <mat-form-field appearance="outline">
-                <mat-label>Close</mat-label>
-                <input matInput type="time" formControlName="to" lang="en-US">
-              </mat-form-field>
+              <label class="drum-field-label">Close</label>
+              <div class="drum-wrap">
+                <div class="sel-line"></div>
+                <div class="drum" id="et-h" data-type="hour"></div>
+                <div class="drum-sep">:</div>
+                <div class="drum" id="et-m" data-type="minute"></div>
+                <div class="drum drum-ampm" id="et-a" data-type="ampm"></div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Holiday -->
         <div formGroupName="holiday">
-          <div class="row">
+          <div class="row mt-3">
             <div class="col-sm-12">
               <h5 class="form-header">Holiday</h5>
             </div>
@@ -71,7 +87,7 @@
               </div>
             </div>
 
-            <!-- Selected Holiday Chips -->
+            <!-- Chips -->
             <div class="col-sm-12" *ngIf="selectedHolidays.length > 0">
               <div class="holiday-chips">
                 <div class="holiday-chip" *ngFor="let item of selectedHolidays">
@@ -107,8 +123,8 @@
 
       </div>
 
-      <!-- Save Button -->
-      <div class="button d-flex justify-content-end">
+      <!-- Save -->
+      <div class="button d-flex justify-content-end mt-3">
         <button type="submit" class="form-btn" (click)="onTimeDataSubmit()" color="primary">Save</button>
       </div>
     </form>
@@ -121,7 +137,6 @@
     <h6 class="modal-title-text">Select Holiday</h6>
     <p class="modal-sub-text">Choose a holiday and set its date range</p>
 
-    <!-- Holiday List -->
     <div class="holiday-list">
       <div
         class="holiday-option"
@@ -137,7 +152,6 @@
       </div>
     </div>
 
-    <!-- Date Range -->
     <div class="date-range-row">
       <div class="date-col">
         <label>FROM DATE</label>
@@ -150,12 +164,19 @@
           [class.error]="dateError && !holidayToDate">
       </div>
     </div>
+
     <p class="date-error-msg" *ngIf="dateError">Please select a holiday and both dates.</p>
 
-    <!-- Actions -->
     <div class="modal-action-row">
       <button type="button" class="btn-cancel" (click)="closeHolidayModal()">Cancel</button>
       <button type="button" class="btn-add" (click)="confirmHoliday()">Add</button>
     </div>
   </div>
 </div>
+
+<!-- Drum picker init script -->
+<ng-container *ngIf="drumReady">
+  <script>
+    window.__initDrums && window.__initDrums();
+  </script>
+</ng-container>

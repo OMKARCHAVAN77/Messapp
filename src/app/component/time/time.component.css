@@ -152,6 +152,99 @@ mat-option {
   background-color: #e99139;
 }
 
+/* ── Drum Time Picker ── */
+.drum-field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #5f6368;
+  margin-bottom: 6px;
+  font-family: "Poppins", sans-serif;
+}
+.drum-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.38);
+  border-radius: 4px;
+  padding: 0 12px;
+  height: 56px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.drum-wrap:hover {
+  border-color: rgba(0, 0, 0, 0.87);
+}
+.drum-wrap::before,
+.drum-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16px;
+  z-index: 2;
+  pointer-events: none;
+}
+.drum-wrap::before {
+  top: 0;
+  background: linear-gradient(to bottom, #fff, transparent);
+}
+.drum-wrap::after {
+  bottom: 0;
+  background: linear-gradient(to top, #fff, transparent);
+}
+.sel-line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 1;
+  pointer-events: none;
+}
+.drum {
+  width: 40px;
+  height: 56px;
+  overflow: hidden;
+  position: relative;
+  cursor: ns-resize;
+  z-index: 3;
+}
+.drum-inner {
+  display: flex;
+  flex-direction: column;
+}
+.drum-item {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+  flex-shrink: 0;
+  user-select: none;
+  font-family: "Poppins", sans-serif;
+}
+.drum-sep {
+  font-size: 20px;
+  font-weight: 500;
+  color: #5f6368;
+  line-height: 56px;
+  font-family: "Poppins", sans-serif;
+  z-index: 3;
+}
+.drum-ampm {
+  width: 32px;
+}
+
 /* ── Select Holiday Input ── */
 .select-holiday-input {
   display: flex;
@@ -218,7 +311,7 @@ mat-option {
   color: #202124;
 }
 
-/* ── Modal Overlay ── */
+/* ── Holiday Modal ── */
 .holiday-modal-overlay {
   position: fixed;
   inset: 0;
@@ -228,8 +321,6 @@ mat-option {
   align-items: center;
   justify-content: center;
 }
-
-/* ── Modal Box ── */
 .holiday-modal {
   background: #fff;
   border-radius: 12px;
@@ -252,8 +343,6 @@ mat-option {
   margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
 }
-
-/* ── Holiday List in Modal ── */
 .holiday-list {
   max-height: 180px;
   overflow-y: auto;
@@ -288,8 +377,6 @@ mat-option {
   flex-shrink: 0;
   cursor: pointer;
 }
-
-/* ── Date Range in Modal ── */
 .date-range-row {
   display: flex;
   gap: 10px;
@@ -332,8 +419,6 @@ mat-option {
   margin-bottom: 0.75rem;
   font-family: "Poppins", sans-serif;
 }
-
-/* ── Modal Actions ── */
 .modal-action-row {
   display: flex;
   gap: 8px;
