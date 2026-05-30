@@ -36,6 +36,7 @@ mat-icon {
 .registerContainer {
   padding: 32px 50px 20px;
   background-color: #fff;
+  background:url('../../../assets/images/background.png');
   box-sizing: border-box;
 }
 
