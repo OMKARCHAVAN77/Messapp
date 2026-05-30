@@ -246,7 +246,8 @@
   }
 
   .background {
-    background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%);
+    /* background: linear-gradient(155.33deg, #D7E2F2 32.79%, #F5DED7 77.76%); */
+    background: url('../../../assets/images/background.png')
   }
 
   .search-field {
