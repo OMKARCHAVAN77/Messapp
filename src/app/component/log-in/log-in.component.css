@@ -35,8 +35,12 @@ mat-icon {
 
 .registerContainer {
   padding: 32px 50px 20px;
-  background-color: #fff;
+  background-color: #F9EEEB;
   background:url('../../../assets/images/background.png');
+  background-attachment: fixed;
+  background-size: cover;      /* optional: makes it fill the screen */
+  background-repeat: no-repeat;
+  background-position: center;
   box-sizing: border-box;
 }
 
